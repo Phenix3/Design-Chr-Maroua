@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import type { LucideIcon } from 'lucide-react';
 import {
   Stethoscope, Calendar, Phone, Users, Award, Heart, Shield,
   Activity, Ambulance, UserCheck, ArrowRight, Clock3, Microscope,
-  Baby, ShieldCheck, ClipboardCheck, TrendingUp
+  Baby, ShieldCheck, ClipboardCheck, TrendingUp, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { IMAGES } from '@/assets/images';
 import IsoSeal from '@/components/IsoSeal';
@@ -23,7 +24,105 @@ const TICKER_ITEMS = [
   '13 Médecins Spécialistes',
 ];
 
+interface HeroCta {
+  to?: string;
+  href?: string;
+  label: string;
+  icon: LucideIcon;
+  primary: boolean;
+}
+
+const HERO_SLIDES: {
+  eyebrow: string;
+  title: React.ReactNode;
+  description: string;
+  image: string;
+  alt: string;
+  badge: { title: string; value: string };
+  ctas: HeroCta[];
+}[] = [
+  {
+    eyebrow: 'Centre Hospitalier Régional de Maroua',
+    title: (
+      <>
+        Des soins d'excellence, avec une <em className="italic text-medical-copper">attention humaine</em>.
+      </>
+    ),
+    description:
+      "Établissement de santé de référence en Extrême-Nord du Cameroun. Une équipe dévouée vous accompagne à chaque étape de votre parcours de soins, avec des technologies adaptées pour des diagnostics précis.",
+    image: IMAGES.MEDICAL_TEAM_6,
+    alt: 'Équipe médicale du CHR Maroua',
+    badge: { title: 'Urgences 24h/24', value: '+237 671 440 486' },
+    ctas: [
+      { to: '/rendez-vous', label: 'Prendre Rendez-vous', icon: Calendar, primary: true },
+      { to: '/services', label: 'Nos Services', icon: ArrowRight, primary: false },
+    ],
+  },
+  {
+    eyebrow: 'Urgences Médicales',
+    title: (
+      <>
+        Une prise en charge <em className="italic text-medical-copper">immédiate</em>, jour et nuit.
+      </>
+    ),
+    description:
+      "Notre service d'urgences est disponible 24h/24 et 7j/7 pour toute urgence médicale, avec une équipe mobilisable en quelques minutes.",
+    image: IMAGES.MEDICAL_EQUIPMENT_2,
+    alt: "Service d'urgences équipé du CHR Maroua",
+    badge: { title: "Ligne d'urgence", value: '+237 671 440 486' },
+    ctas: [
+      { href: 'tel:+237671440486', label: 'Appeler les urgences', icon: Phone, primary: true },
+      { to: '/rendez-vous', label: 'Prendre rendez-vous', icon: Calendar, primary: false },
+    ],
+  },
+  {
+    eyebrow: 'Certification Qualité',
+    title: (
+      <>
+        Officiellement <em className="italic text-medical-copper">certifié</em> ISO 9001:2015.
+      </>
+    ),
+    description:
+      "L'agrément ISO 9001:2015 confirme l'exigence et la rigueur de nos processus, au service de la sécurité et de la satisfaction de chaque patient.",
+    image: IMAGES.MEDICAL_TEAM_3,
+    alt: 'Équipe soignante du CHR Maroua',
+    badge: { title: 'Qualité certifiée', value: 'ISO 9001:2015' },
+    ctas: [
+      { to: '/qualite', label: 'Découvrir notre démarche qualité', icon: Award, primary: true },
+      { to: '/services', label: 'Nos Services', icon: ArrowRight, primary: false },
+    ],
+  },
+  {
+    eyebrow: '28 Spécialités Médicales',
+    title: (
+      <>
+        Un plateau technique <em className="italic text-medical-copper">complet</em> à votre service.
+      </>
+    ),
+    description:
+      "Du diagnostic au traitement, nos 28 spécialités couvrent l'ensemble des besoins de santé de la population de l'Extrême-Nord.",
+    image: IMAGES.HOSPITAL_INTERIOR_3,
+    alt: 'Intérieur moderne du CHR Maroua',
+    badge: { title: 'Spécialités', value: '28' },
+    ctas: [
+      { to: '/services', label: 'Voir les 28 spécialités', icon: ArrowRight, primary: true },
+      { to: '/rendez-vous', label: 'Prendre rendez-vous', icon: Calendar, primary: false },
+    ],
+  },
+];
+
 const Index = () => {
+  const [heroIndex, setHeroIndex] = useState(0);
+  const [heroPaused, setHeroPaused] = useState(false);
+
+  // Autoplay du carrousel — 7s par diapositive, désactivé au survol et en reduced-motion
+  useEffect(() => {
+    if (heroPaused) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const id = setInterval(() => setHeroIndex(i => (i + 1) % HERO_SLIDES.length), 7000);
+    return () => clearInterval(id);
+  }, [heroPaused]);
+
   const services = [
     { icon: Ambulance, title: 'Urgences 24h/24', description: 'Prise en charge immédiate pour toute urgence médicale, disponible en permanence.' },
     { icon: Heart, title: 'Cardiologie', description: 'Prévention, diagnostic et traitement de toutes les maladies du cœur et des vaisseaux.' },
@@ -83,37 +182,47 @@ const Index = () => {
           Maroua
         </span>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 lg:pt-24 pb-16 lg:pb-28">
+        <div
+          className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 lg:pt-24 pb-10 lg:pb-16"
+          onMouseEnter={() => setHeroPaused(true)}
+          onMouseLeave={() => setHeroPaused(false)}
+        >
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-20 items-center">
-            {/* Texte */}
+            {/* Texte — diapositive active */}
             <Reveal>
-            <div className="space-y-8">
+            <div key={`text-${heroIndex}`} className="animate-fade-in space-y-8">
               <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-medical-copper">
                 <span className="h-px w-10 bg-medical-copper/60" aria-hidden="true" />
-                Centre Hospitalier Régional de Maroua
+                {HERO_SLIDES[heroIndex].eyebrow}
               </p>
-              <h1 className="text-4xl sm:text-5xl lg:text-[4rem] font-heading font-semibold leading-[1.05] text-foreground">
-                Des soins d'excellence, avec une{' '}
-                <em className="italic text-medical-copper">attention humaine</em>.
+              <h1 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-heading font-semibold leading-[1.05] text-foreground">
+                {HERO_SLIDES[heroIndex].title}
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
-                Établissement de santé de référence en Extrême-Nord du Cameroun. Une équipe dévouée
-                vous accompagne à chaque étape de votre parcours de soins, avec des technologies
-                adaptées pour des diagnostics précis.
+                {HERO_SLIDES[heroIndex].description}
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link to="/rendez-vous">
-                  <Button size="lg" className="cursor-pointer medical-gradient text-white shadow-xl hover:opacity-90 transition-opacity font-semibold min-h-[52px] rounded-full px-8">
-                    <Calendar className="w-5 h-5 mr-2" />
-                    Prendre Rendez-vous
-                  </Button>
-                </Link>
-                <Link to="/services">
-                  <Button size="lg" variant="outline" className="cursor-pointer rounded-full border-2 border-foreground/20 hover:border-foreground hover:bg-medical-pine hover:text-white transition-colors min-h-[52px] px-8">
-                    Nos Services
-                    <ArrowRight className="w-5 h-5 ml-1" />
-                  </Button>
-                </Link>
+                {HERO_SLIDES[heroIndex].ctas.map((cta, i) => {
+                  const Icon = cta.icon;
+                  const cls = cta.primary
+                    ? 'cursor-pointer medical-gradient text-white shadow-xl hover:opacity-90 transition-opacity font-semibold min-h-[52px] rounded-full px-8'
+                    : 'cursor-pointer rounded-full border-2 border-foreground/20 hover:border-foreground hover:bg-medical-pine hover:text-white transition-colors min-h-[52px] px-8';
+                  const inner = (
+                    <>
+                      <Icon className="w-5 h-5 mr-2" />
+                      {cta.label}
+                    </>
+                  );
+                  return cta.to ? (
+                    <Link key={i} to={cta.to}>
+                      <Button size="lg" className={cls}>{inner}</Button>
+                    </Link>
+                  ) : (
+                    <a key={i} href={cta.href}>
+                      <Button size="lg" className={cls}>{inner}</Button>
+                    </a>
+                  );
+                })}
               </div>
 
               {/* Stats — filets éditoriaux */}
@@ -132,26 +241,26 @@ const Index = () => {
             </div>
             </Reveal>
 
-            {/* Image en arche */}
+            {/* Image en arche — diapositive active */}
             <Reveal delay={150}>
-            <div className="relative">
+            <div key={`img-${heroIndex}`} className="animate-fade-in relative">
               <div className="relative rounded-t-[999px] rounded-b-[2rem] overflow-hidden border-[6px] border-white shadow-2xl aspect-[3/4] max-h-[560px]">
                 <img
-                  src={IMAGES.MEDICAL_TEAM_6}
-                  alt="Équipe médicale du CHR Maroua"
+                  src={HERO_SLIDES[heroIndex].image}
+                  alt={HERO_SLIDES[heroIndex].alt}
                   loading="lazy"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/50 via-transparent to-transparent" />
-                {/* Carte urgences */}
+                {/* Carte infos */}
                 <div className="absolute bottom-5 left-5 right-5 bg-card/95 backdrop-blur-sm rounded-2xl p-4 shadow-xl flex items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-medical-copper rounded-full flex items-center justify-center">
                       <Phone className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <div className="text-xs uppercase tracking-wider text-muted-foreground">Urgences 24h/24</div>
-                      <div className="text-sm font-bold text-foreground">+237 671 440 486</div>
+                      <div className="text-xs uppercase tracking-wider text-muted-foreground">{HERO_SLIDES[heroIndex].badge.title}</div>
+                      <div className="text-sm font-bold text-foreground">{HERO_SLIDES[heroIndex].badge.value}</div>
                     </div>
                   </div>
                   <div className="w-2.5 h-2.5 rounded-full bg-emergency-red animate-pulse" aria-hidden="true" />
@@ -163,6 +272,38 @@ const Index = () => {
               </div>
             </div>
             </Reveal>
+          </div>
+
+          {/* Contrôles du carrousel */}
+          <div className="relative flex items-center justify-center gap-5 pt-8 lg:pt-10">
+            <button
+              onClick={() => setHeroIndex(i => (i - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)}
+              aria-label="Diapositive précédente"
+              className="w-11 h-11 rounded-full border border-border bg-card hover:bg-secondary flex items-center justify-center transition-colors cursor-pointer min-h-[44px] min-w-[44px]"
+            >
+              <ChevronLeft className="w-5 h-5 text-foreground" />
+            </button>
+            <div className="flex items-center gap-2.5" role="tablist" aria-label="Diapositives">
+              {HERO_SLIDES.map((slide, i) => (
+                <button
+                  key={i}
+                  onClick={() => setHeroIndex(i)}
+                  role="tab"
+                  aria-selected={heroIndex === i}
+                  aria-label={`Diapositive ${i + 1} : ${slide.eyebrow}`}
+                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer min-h-[6px] ${
+                    heroIndex === i ? 'w-10 bg-medical-copper' : 'w-5 bg-foreground/20 hover:bg-foreground/40'
+                  }`}
+                />
+              ))}
+            </div>
+            <button
+              onClick={() => setHeroIndex(i => (i + 1) % HERO_SLIDES.length)}
+              aria-label="Diapositive suivante"
+              className="w-11 h-11 rounded-full border border-border bg-card hover:bg-secondary flex items-center justify-center transition-colors cursor-pointer min-h-[44px] min-w-[44px]"
+            >
+              <ChevronRight className="w-5 h-5 text-foreground" />
+            </button>
           </div>
         </div>
       </section>
