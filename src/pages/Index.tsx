@@ -11,6 +11,7 @@ import { IMAGES } from '@/assets/images';
 import IsoSeal from '@/components/IsoSeal';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import Reveal from '@/components/Reveal';
 
 const TICKER_ITEMS = [
   'Sécurité',
@@ -85,7 +86,8 @@ const Index = () => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 lg:pt-24 pb-16 lg:pb-28">
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-20 items-center">
             {/* Texte */}
-            <div className="space-y-8 animate-fade-in">
+            <Reveal>
+            <div className="space-y-8">
               <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-medical-copper">
                 <span className="h-px w-10 bg-medical-copper/60" aria-hidden="true" />
                 Centre Hospitalier Régional de Maroua
@@ -123,15 +125,16 @@ const Index = () => {
                   { value: 'ISO 9001', label: 'Certifié' },
                 ].map((s, i) => (
                   <div key={i} className={i > 0 ? 'sm:border-l sm:border-border sm:pl-6' : ''}>
-                    <div className="text-3xl font-heading font-semibold text-foreground">{s.value}</div>
-                    <div className="text-xs uppercase tracking-wider text-muted-foreground mt-1">{s.label}</div>
-                  </div>
-                ))}
+                    <div className="text-3xl font-heading font-semibold text-foreground">{s.value}</div>                  <div className="text-xs uppercase tracking-wider text-muted-foreground mt-1">{s.label}</div>
+                </div>
+              ))}
               </div>
             </div>
+            </Reveal>
 
             {/* Image en arche */}
-            <div className="relative animate-slide-up">
+            <Reveal delay={150}>
+            <div className="relative">
               <div className="relative rounded-t-[999px] rounded-b-[2rem] overflow-hidden border-[6px] border-white shadow-2xl aspect-[3/4] max-h-[560px]">
                 <img
                   src={IMAGES.MEDICAL_TEAM_6}
@@ -159,11 +162,13 @@ const Index = () => {
                 <IsoSeal size={110} className="animate-float" />
               </div>
             </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
       {/* ===== Ticker éditorial ===== */}
+      <Reveal>
       <div className="bg-foreground text-white border-y-4 border-medical-gold/60 overflow-hidden py-3.5" aria-hidden="true">
         <div className="flex whitespace-nowrap w-max animate-marquee">
           {[0, 1].map(copy => (
@@ -178,6 +183,7 @@ const Index = () => {
           ))}
         </div>
       </div>
+      </Reveal>
 
       {/* ===== Certification ISO 9001 ===== */}
       <section className="relative overflow-hidden bg-foreground text-white py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
@@ -190,14 +196,17 @@ const Index = () => {
         <div className="relative max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-14 lg:gap-16 items-center">
             {/* Sceau */}
+            <Reveal>
             <div className="flex justify-center order-2 lg:order-1">
               <div className="relative">
                 <div className="absolute inset-4 bg-amber-400/25 rounded-full blur-3xl scale-125" aria-hidden="true" />
                 <IsoSeal size={250} className="drop-shadow-2xl" />
               </div>
             </div>
+            </Reveal>
 
             {/* Texte */}
+            <Reveal delay={150}>
             <div className="order-1 lg:order-2 space-y-6">
               <div className="inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-amber-400/10 px-4 py-1.5">
                 <Award className="w-4 h-4 text-amber-400" />
@@ -217,16 +226,15 @@ const Index = () => {
                 {isoPillars.map((p, i) => {
                   const Icon = p.icon;
                   return (
-                    <div
-                      key={i}
-                      className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 hover:border-amber-400/30 transition-colors duration-200"
-                    >
+                    <Reveal key={i} delay={i * 60} className="h-full">
+                    <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 hover:border-amber-400/30 transition-colors duration-200 h-full">
                       <div className="w-11 h-11 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl flex items-center justify-center mb-3 shadow-md">
                         <Icon className="w-5 h-5 text-white" />
                       </div>
                       <h3 className="text-sm font-heading font-semibold mb-1">{p.title}</h3>
                       <p className="text-xs text-white/65 leading-relaxed">{p.description}</p>
                     </div>
+                    </Reveal>
                   );
                 })}
               </div>
@@ -244,6 +252,7 @@ const Index = () => {
                 </Link>
               </div>
             </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -268,10 +277,8 @@ const Index = () => {
             {services.map((service, i) => {
               const Icon = service.icon;
               return (
-                <div
-                  key={i}
-                  className="group grid md:grid-cols-[80px_64px_1fr_auto] items-center gap-4 md:gap-6 border-b border-border py-6 md:py-7 px-2 md:px-4 hover:bg-card transition-colors duration-200"
-                >
+                <Reveal key={i} delay={i * 60}>
+                <div className="group grid md:grid-cols-[80px_64px_1fr_auto] items-center gap-4 md:gap-6 border-b border-border py-6 md:py-7 px-2 md:px-4 hover:bg-card transition-colors duration-200">
                   <span className="text-3xl font-heading font-semibold text-medical-copper/60 group-hover:text-medical-copper transition-colors">
                     {String(i + 1).padStart(2, '0')}
                   </span>
@@ -289,6 +296,7 @@ const Index = () => {
                     <ArrowRight className="w-4 h-4 text-medical-copper" />
                   </Link>
                 </div>
+                </Reveal>
               );
             })}
           </div>
@@ -320,13 +328,15 @@ const Index = () => {
             {features.map((f, i) => {
               const Icon = f.icon;
               return (
-                <div key={i} className="text-center group">
+                <Reveal key={i} delay={i * 80} className="h-full">
+                <div className="text-center group h-full">
                   <div className="inline-flex items-center justify-center w-[72px] h-[72px] rounded-full border border-medical-copper/30 bg-white text-medical-copper mb-5 group-hover:bg-medical-copper group-hover:text-white group-hover:scale-105 transition-all duration-200 shadow-md">
                     <Icon className="w-8 h-8" />
                   </div>
                   <h3 className="text-lg font-heading font-semibold text-foreground mb-2">{f.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">{f.description}</p>
                 </div>
+                </Reveal>
               );
             })}
           </div>
@@ -343,13 +353,15 @@ const Index = () => {
             {stats.map((s, i) => {
               const Icon = s.icon;
               return (
-                <div key={i} className="text-center group">
+                <Reveal key={i} delay={i * 80}>
+                <div className="text-center group">
                   <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white/15 backdrop-blur-sm border border-white/25 mb-4 group-hover:scale-105 transition-transform">
                     <Icon className="w-6 h-6" />
                   </div>
                   <div className="text-4xl font-heading font-semibold mb-1">{s.value}</div>
                   <div className="text-white/80 text-sm">{s.label}</div>
                 </div>
+                </Reveal>
               );
             })}
           </div>
@@ -359,6 +371,7 @@ const Index = () => {
       {/* ===== CTA ===== */}
       <section className="py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
+          <Reveal>
           <div className="relative bg-card border border-border rounded-[2rem] shadow-xl overflow-hidden px-8 py-14 lg:p-16 text-center">
             <div className="absolute top-0 left-0 right-0 h-1.5 medical-gradient" aria-hidden="true" />
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full medical-gradient text-white mb-6 shadow-lg">
@@ -386,6 +399,7 @@ const Index = () => {
               </Link>
             </div>
           </div>
+          </Reveal>
         </div>
       </section>
 

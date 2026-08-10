@@ -10,6 +10,7 @@ import type { Category } from '@/lib/services';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import PageHero from '@/components/PageHero';
+import Reveal from '@/components/Reveal';
 
 type FilterCategory = 'Tous' | Category;
 
@@ -78,11 +79,12 @@ const Services = () => {
             {filteredServices.length} service{filteredServices.length > 1 ? 's' : ''} affiché{filteredServices.length > 1 ? 's' : ''}
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredServices.map((service) => {
+            {filteredServices.map((service, i) => {
               const Icon = service.icon;
               return (
-                <Link key={service.id} to={`/services/${service.slug}`} className="block group">
-                  <Card className="hover-lift cursor-pointer border border-border bg-card overflow-hidden transition-shadow duration-200">
+                <Reveal key={service.id} delay={(i % 4) * 80} className="h-full">
+                <Link to={`/services/${service.slug}`} className="block group h-full">
+                  <Card className="hover-lift cursor-pointer border border-border bg-card overflow-hidden transition-shadow duration-200 h-full">
                     <CardContent className="p-6 flex flex-col gap-4">
                       <div className="flex items-start justify-between">
                         <div className="w-12 h-12 rounded-full bg-medical-copper/10 text-medical-copper flex items-center justify-center group-hover:bg-medical-copper group-hover:text-white transition-colors duration-200 flex-shrink-0">
@@ -99,14 +101,14 @@ const Services = () => {
                         </p>
                         <h3 className="font-heading font-semibold text-foreground text-lg leading-snug group-hover:text-medical-copper transition-colors duration-200">
                           {service.title}
-                        </h3>
-                        <p className="text-muted-foreground text-sm leading-relaxed">
-                          {service.description}
-                        </p>
-                      </div>
-                    </CardContent>
+                        </h3>                      <p className="text-muted-foreground text-sm leading-relaxed">
+                        {service.description}
+                      </p>
+                    </div>
+                  </CardContent>
                   </Card>
                 </Link>
+                </Reveal>
               );
             })}
           </div>
@@ -115,6 +117,7 @@ const Services = () => {
 
       {/* ── Bandeau urgences ── */}
       <section className="py-8 px-4 sm:px-6 lg:px-8 bg-emergency-red/5 border-y border-emergency-red/15">
+        <Reveal>
         <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-emergency-red/10 rounded-full flex items-center justify-center flex-shrink-0">
@@ -133,10 +136,12 @@ const Services = () => {
             +237 671 440 486
           </a>
         </div>
+        </Reveal>
       </section>
 
       {/* ── CTA ── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 medical-gradient text-white relative overflow-hidden">
+        <Reveal>
         <div className="relative max-w-3xl mx-auto text-center">
           <h2 className="font-heading text-3xl md:text-4xl font-semibold mb-4">
             Besoin d'une consultation ?
@@ -168,6 +173,7 @@ const Services = () => {
             </Button>
           </div>
         </div>
+        </Reveal>
       </section>
 
       <SiteFooter />
