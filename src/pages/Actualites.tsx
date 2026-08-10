@@ -10,6 +10,7 @@ import {
 import { articles } from '@/lib/articles';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import { IMAGES } from '@/assets/images';
 import PageHero from '@/components/PageHero';
 
 const categories = ['Tous', 'Santé Publique', 'Cardiologie'];
@@ -35,6 +36,7 @@ const Actualites = () => {
           { icon: Newspaper, label: '2 publications' },
           { icon: Phone, label: 'Urgences 24h/24' },
         ]}
+        images={[IMAGES.PATIENT_CARE_1, IMAGES.MEDICAL_EQUIPMENT_2, IMAGES.HOSPITAL_EXTERIOR_3]}
       />
 
       {/* ── Filtres ── */}

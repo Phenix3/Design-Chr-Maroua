@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import { IMAGES } from '@/assets/images';
 import PageHero from '@/components/PageHero';
 
 const Contact = () => {
@@ -36,6 +37,7 @@ const Contact = () => {
           { icon: Clock, label: 'Lun–Ven, 7h30–15h30' },
           { icon: MapPin, label: 'Sékandé, Maroua' },
         ]}
+        images={[IMAGES.HOSPITAL_EXTERIOR_2, IMAGES.HOSPITAL_INTERIOR_2, IMAGES.PATIENT_CARE_2]}
       />
 
       {/* ── Urgences — carte alerte ── */}

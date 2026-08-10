@@ -10,6 +10,7 @@ import {
 import IsoSeal from '@/components/IsoSeal';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import { IMAGES } from '@/assets/images';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
 
@@ -106,6 +107,7 @@ const QUALITE = () => (
         { icon: ShieldCheck, label: 'Audit externe indépendant' },
         { icon: TrendingUp, label: 'Amélioration continue' },
       ]}
+      images={[IMAGES.MEDICAL_EQUIPMENT_4, IMAGES.HOSPITAL_EXTERIOR_6, IMAGES.MEDICAL_TEAM_8]}
     />
 
     {/* ── Déclaration + sceau ── */}

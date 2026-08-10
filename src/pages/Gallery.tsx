@@ -78,6 +78,7 @@ const Gallery = () => {
           { icon: MapPin, label: 'Sékandé, Maroua' },
           { icon: Calendar, label: 'Janvier 2025' },
         ]}
+        images={[IMAGES.HOSPITAL_INTERIOR_3, IMAGES.MEDICAL_TEAM_5, IMAGES.HOSPITAL_EXTERIOR_5]}
       />
 
       {/* ── Filtres ── */}

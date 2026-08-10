@@ -78,6 +78,7 @@ const Equipe = () => (
         { icon: Users, label: '12 chefs de service' },
         { icon: ShieldCheck, label: 'Certifié ISO 9001:2015' },
       ]}
+      images={[IMAGES.MEDICAL_TEAM_1, IMAGES.MEDICAL_TEAM_4, IMAGES.MEDICAL_TEAM_9]}
     />
 
     {/* ── Stats ── */}

@@ -9,6 +9,7 @@ import { SERVICES, CATEGORIES as SERVICE_CATEGORIES, CATEGORY_COUNT } from '@/li
 import type { Category } from '@/lib/services';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import { IMAGES } from '@/assets/images';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
 
@@ -38,6 +39,7 @@ const Services = () => {
           { icon: Phone, label: 'Urgences 24h/24' },
           { icon: Award, label: 'Certifié ISO 9001:2015' },
         ]}
+        images={[IMAGES.MEDICAL_EQUIPMENT_1, IMAGES.HOSPITAL_INTERIOR_1, IMAGES.MEDICAL_TEAM_2]}
       />
 
       {/* ── Filtres ── */}

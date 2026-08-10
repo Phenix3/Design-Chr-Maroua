@@ -9,6 +9,7 @@ import {
 import { getServiceBySlug, getRelatedServices } from '@/lib/services';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import { IMAGES } from '@/assets/images';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
 
@@ -61,6 +62,7 @@ const ServiceDetail = () => {
           { icon: Clock, label: 'Rendez-vous sur demande' },
           { icon: Phone, label: 'Urgences 24h/24' },
         ]}
+        images={[IMAGES.HOSPITAL_INTERIOR_7, IMAGES.MEDICAL_EQUIPMENT_5, IMAGES.PATIENT_CARE_5]}
       />
 
       {/* ── Détail ── */}

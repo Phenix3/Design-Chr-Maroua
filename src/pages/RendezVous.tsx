@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import { IMAGES } from '@/assets/images';
 import PageHero from '@/components/PageHero';
 
 const SPECIALITES = [
@@ -81,6 +82,7 @@ const RendezVous = () => {
           { icon: Phone, label: 'Urgences : +237 671 440 486' },
           { icon: Clock, label: 'Standard : +237 689 867 206' },
         ]}
+        images={[IMAGES.HOSPITAL_INTERIOR_6, IMAGES.MEDICAL_EQUIPMENT_3, IMAGES.PATIENT_CARE_3]}
       />
 
       {/* ── Formulaire ── */}

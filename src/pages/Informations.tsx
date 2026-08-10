@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import { IMAGES } from '@/assets/images';
 import PageHero from '@/components/PageHero';
 
 const visitingHours = [
@@ -178,6 +179,7 @@ const Informations = () => {
           { icon: MapPin, label: 'Sékandé, Maroua' },
           { icon: Calendar, label: 'Admissions Lun–Ven' },
         ]}
+        images={[IMAGES.HOSPITAL_EXTERIOR_1, IMAGES.HOSPITAL_INTERIOR_4, IMAGES.MEDICAL_TEAM_7]}
       />
 
       {/* ── Accès rapide ── */}
