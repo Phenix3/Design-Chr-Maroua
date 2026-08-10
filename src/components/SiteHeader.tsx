@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { to: '/galerie', label: 'Galerie' },
   { to: '/contact', label: 'Contact' },
   { to: '/informations', label: 'Informations' },
+  { to: '/qualite', label: 'Qualité' },
 ];
 
 interface SiteHeaderProps {
@@ -52,12 +53,12 @@ const SiteHeader = ({ active }: SiteHeaderProps) => {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden xl:flex items-center gap-0.5">
             {NAV_LINKS.map(link => (
               <Link
                 key={link.to}
                 to={link.to}
-                className={`px-3 py-2 rounded-full text-[13px] uppercase tracking-wider transition-colors duration-200 cursor-pointer font-medium ${
+                className={`px-2.5 py-2 rounded-full text-xs uppercase tracking-wide transition-colors duration-200 cursor-pointer font-medium ${
                   active === link.to
                     ? 'text-foreground bg-secondary'
                     : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
@@ -69,7 +70,7 @@ const SiteHeader = ({ active }: SiteHeaderProps) => {
           </nav>
 
           {/* CTA */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden xl:flex items-center gap-3">
             <a
               href="tel:+237671440486"
               className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-medical-copper border border-medical-copper/40 rounded-full hover:bg-medical-copper/5 transition-colors duration-200 cursor-pointer min-h-[40px]"
@@ -88,7 +89,7 @@ const SiteHeader = ({ active }: SiteHeaderProps) => {
           {/* Mobile menu */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 rounded-full hover:bg-secondary transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="xl:hidden p-2 rounded-full hover:bg-secondary transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
           >
             {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -97,7 +98,7 @@ const SiteHeader = ({ active }: SiteHeaderProps) => {
 
         {/* Mobile Nav */}
         {isMenuOpen && (
-          <div className="lg:hidden py-3 border-t border-border">
+          <div className="xl:hidden py-3 border-t border-border">
             <nav className="flex flex-col gap-1">
               {NAV_LINKS.map(link => (
                 <Link

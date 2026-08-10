@@ -60,6 +60,7 @@ const SiteFooter = () => (
               { to: '/actualites', label: 'Actualités' },
               { to: '/galerie', label: 'Galerie' },
               { to: '/informations', label: 'Informations Pratiques' },
+              { to: '/qualite', label: 'Certification Qualité' },
             ].map(link => (
               <li key={link.to}>
                 <Link to={link.to} className="text-white/65 hover:text-white transition-colors text-sm flex items-center group cursor-pointer">

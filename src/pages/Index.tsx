@@ -231,7 +231,7 @@ const Index = () => {
                 })}
               </div>
               <div className="flex flex-wrap gap-4 pt-2">
-                <Link to="/informations">
+                <Link to="/qualite">
                   <Button size="lg" className="bg-amber-400 text-foreground hover:bg-amber-300 shadow-lg cursor-pointer font-semibold min-h-[48px] rounded-full px-8">
                     Découvrir notre démarche qualité
                     <ArrowRight className="w-5 h-5 ml-1" />

@@ -12,12 +12,14 @@ interface PageHeroProps {
   description?: string;
   /** Chiffre géant en contour affiché à droite (éditorial) */
   number?: string;
+  /** Taille du chiffre (défaut 15rem) */
+  numberSize?: string;
   meta?: PageHeroMeta[];
 }
 
 const CROSS_PATTERN = `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`;
 
-const PageHero = ({ eyebrow, title, description, number, meta }: PageHeroProps) => (
+const PageHero = ({ eyebrow, title, description, number, numberSize = '15rem', meta }: PageHeroProps) => (
   <section className="relative overflow-hidden medical-gradient text-white">
     <div className="absolute inset-0 opacity-[0.07]" aria-hidden="true" style={{ backgroundImage: CROSS_PATTERN }} />
     <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/10 blur-3xl" aria-hidden="true" />
@@ -55,7 +57,7 @@ const PageHero = ({ eyebrow, title, description, number, meta }: PageHeroProps) 
           <div className="hidden lg:flex justify-end select-none pointer-events-none" aria-hidden="true">
             <span
               className="font-heading font-bold leading-none text-transparent opacity-40"
-              style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.5)', fontSize: '15rem' }}
+              style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.5)', fontSize: numberSize }}
             >
               {number}
             </span>
