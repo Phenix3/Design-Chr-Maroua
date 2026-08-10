@@ -187,7 +187,7 @@ const Informations = () => {
             <button
               key={s.id}
               onClick={() => { toggleSection(s.id); document.getElementById(`section-${s.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 cursor-pointer min-h-[40px] ${openSection === s.id ? 'bg-foreground text-white shadow-sm' : 'bg-secondary text-muted-foreground hover:text-foreground border border-border'}`}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 cursor-pointer min-h-[40px] ${openSection === s.id ? 'bg-medical-pine text-white shadow-sm' : 'bg-secondary text-muted-foreground hover:text-foreground border border-border'}`}
             >
               <s.icon className="w-4 h-4" /> {s.title}
             </button>

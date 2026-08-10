@@ -53,7 +53,7 @@ const Services = () => {
                   onClick={() => setActiveCategory(cat)}
                   className={`min-h-[44px] px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 flex items-center gap-1.5 border ${
                     isActive
-                      ? 'bg-foreground text-white border-foreground shadow-md'
+                      ? 'bg-medical-pine text-white border-medical-pine shadow-md'
                       : 'bg-background text-foreground border-border hover:bg-secondary hover:text-foreground'
                   }`}
                 >
@@ -153,7 +153,7 @@ const Services = () => {
             <Button
               asChild
               size="lg"
-              className="bg-white text-foreground hover:bg-white/90 font-semibold min-h-[48px] shadow-lg rounded-full px-10 transition-colors duration-200"
+              className="bg-white text-medical-pine hover:bg-white/90 font-semibold min-h-[48px] shadow-lg rounded-full px-10 transition-colors duration-200"
             >
               <Link to="/rendez-vous">
                 <Calendar className="w-5 h-5 mr-2" />

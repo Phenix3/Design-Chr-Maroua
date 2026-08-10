@@ -190,7 +190,7 @@ const Equipe = () => (
                     <div className="w-11 h-11 rounded-full medical-gradient flex items-center justify-center shadow-lg border-2 border-white font-heading font-bold text-white text-sm">
                       {member.initials}
                     </div>
-                    <span className="text-[10px] uppercase tracking-[0.15em] text-white/90 bg-foreground/40 backdrop-blur-sm rounded-full px-2.5 py-1">
+                    <span className="text-[10px] uppercase tracking-[0.15em] text-white/90 bg-medical-pine/40 backdrop-blur-sm rounded-full px-2.5 py-1">
                       Chef de Service
                     </span>
                   </div>
@@ -254,7 +254,7 @@ const Equipe = () => (
           <Button
             asChild
             size="lg"
-            className="bg-white text-foreground hover:bg-white/90 font-semibold min-h-[48px] shadow-lg rounded-full px-10 transition-colors duration-200"
+            className="bg-white text-medical-pine hover:bg-white/90 font-semibold min-h-[48px] shadow-lg rounded-full px-10 transition-colors duration-200"
           >
             <Link to="/rendez-vous">
               <Calendar className="w-5 h-5 mr-2" />

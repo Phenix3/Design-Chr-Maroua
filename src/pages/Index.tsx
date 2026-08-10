@@ -74,7 +74,7 @@ const Index = () => {
         {/* Décor de fond */}
         <div className="absolute inset-0 hero-pattern" aria-hidden="true" />
         <div className="absolute -top-32 right-[-8%] w-[38rem] h-[38rem] rounded-full bg-medical-copper/10 blur-3xl" aria-hidden="true" />
-        <div className="absolute bottom-[-10%] left-[-6%] w-[30rem] h-[30rem] rounded-full bg-foreground/10 blur-3xl" aria-hidden="true" />
+        <div className="absolute bottom-[-10%] left-[-6%] w-[30rem] h-[30rem] rounded-full bg-medical-pine/10 blur-3xl" aria-hidden="true" />
         {/* Filigrane éditorial */}
         <span
           className="absolute bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap text-[18vw] lg:text-[13vw] leading-none font-heading font-bold text-outline opacity-[0.07] select-none pointer-events-none"
@@ -109,7 +109,7 @@ const Index = () => {
                   </Button>
                 </Link>
                 <Link to="/services">
-                  <Button size="lg" variant="outline" className="cursor-pointer rounded-full border-2 border-foreground/20 hover:border-foreground hover:bg-foreground hover:text-white transition-colors min-h-[52px] px-8">
+                  <Button size="lg" variant="outline" className="cursor-pointer rounded-full border-2 border-foreground/20 hover:border-foreground hover:bg-medical-pine hover:text-white transition-colors min-h-[52px] px-8">
                     Nos Services
                     <ArrowRight className="w-5 h-5 ml-1" />
                   </Button>
@@ -144,7 +144,7 @@ const Index = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/50 via-transparent to-transparent" />
                 {/* Carte urgences */}
-                <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-xl flex items-center justify-between gap-3">
+                <div className="absolute bottom-5 left-5 right-5 bg-card/95 backdrop-blur-sm rounded-2xl p-4 shadow-xl flex items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-medical-copper rounded-full flex items-center justify-center">
                       <Phone className="w-5 h-5 text-white" />
@@ -169,7 +169,7 @@ const Index = () => {
 
       {/* ===== Ticker éditorial ===== */}
       <Reveal>
-      <div className="bg-foreground text-white border-y-4 border-medical-gold/60 overflow-hidden py-3.5" aria-hidden="true">
+      <div className="bg-medical-pine text-white border-y-4 border-medical-gold/60 overflow-hidden py-3.5" aria-hidden="true">
         <div className="flex whitespace-nowrap w-max animate-marquee">
           {[0, 1].map(copy => (
             <div key={copy} className="flex items-center">
@@ -186,7 +186,7 @@ const Index = () => {
       </Reveal>
 
       {/* ===== Certification ISO 9001 ===== */}
-      <section className="relative overflow-hidden bg-foreground text-white py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-medical-pine text-white py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
         <div className="absolute -top-40 -left-40 w-[28rem] h-[28rem] rounded-full bg-medical-copper/20 blur-3xl" aria-hidden="true" />
         <div className="absolute -bottom-40 -right-40 w-[28rem] h-[28rem] rounded-full bg-amber-500/15 blur-3xl" aria-hidden="true" />
         <div className="absolute inset-0 opacity-[0.05]" aria-hidden="true" style={{
@@ -240,7 +240,7 @@ const Index = () => {
               </div>
               <div className="flex flex-wrap gap-4 pt-2">
                 <Link to="/qualite">
-                  <Button size="lg" className="bg-amber-400 text-foreground hover:bg-amber-300 shadow-lg cursor-pointer font-semibold min-h-[48px] rounded-full px-8">
+                  <Button size="lg" className="bg-amber-400 text-medical-pine hover:bg-amber-300 shadow-lg cursor-pointer font-semibold min-h-[48px] rounded-full px-8">
                     Découvrir notre démarche qualité
                     <ArrowRight className="w-5 h-5 ml-1" />
                   </Button>
@@ -316,7 +316,7 @@ const Index = () => {
       <section className="py-20 lg:py-28 bg-medical-sand px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
-            <Badge className="mb-4 bg-white text-medical-copper hover:bg-white uppercase tracking-[0.2em]">Notre Engagement</Badge>
+            <Badge className="mb-4 bg-white text-medical-copper hover:bg-white dark:bg-secondary dark:text-medical-gold dark:hover:bg-secondary uppercase tracking-[0.2em]">Notre Engagement</Badge>
             <h2 className="text-3xl lg:text-5xl font-heading font-semibold text-foreground leading-tight">
               Sécurité · Qualité · <em className="italic text-medical-copper">Humanisation</em>
             </h2>
@@ -330,7 +330,7 @@ const Index = () => {
               return (
                 <Reveal key={i} delay={i * 80} className="h-full">
                 <div className="text-center group h-full">
-                  <div className="inline-flex items-center justify-center w-[72px] h-[72px] rounded-full border border-medical-copper/30 bg-white text-medical-copper mb-5 group-hover:bg-medical-copper group-hover:text-white group-hover:scale-105 transition-all duration-200 shadow-md">
+                  <div className="inline-flex items-center justify-center w-[72px] h-[72px] rounded-full border border-medical-copper/30 bg-white dark:bg-secondary dark:border-medical-copper/50 text-medical-copper mb-5 group-hover:bg-medical-copper group-hover:text-white group-hover:scale-105 transition-all duration-200 shadow-md">
                     <Icon className="w-8 h-8" />
                   </div>
                   <h3 className="text-lg font-heading font-semibold text-foreground mb-2">{f.title}</h3>
@@ -392,7 +392,7 @@ const Index = () => {
                 </Button>
               </Link>
               <Link to="/contact">
-                <Button size="lg" variant="outline" className="cursor-pointer rounded-full border-2 border-foreground/20 hover:border-foreground hover:bg-foreground hover:text-white transition-colors min-h-[52px] px-10">
+                <Button size="lg" variant="outline" className="cursor-pointer rounded-full border-2 border-foreground/20 hover:border-foreground hover:bg-medical-pine hover:text-white transition-colors min-h-[52px] px-10">
                   <Phone className="w-5 h-5 mr-2" />
                   Nous Contacter
                 </Button>

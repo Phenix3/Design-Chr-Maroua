@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Stethoscope, Calendar, Phone, Menu, X, ShieldCheck, Sparkles } from 'lucide-react';
+import { Stethoscope, Calendar, Phone, Menu, X, ShieldCheck, Sparkles, Sun, Moon } from 'lucide-react';
 
 const NAV_LINKS = [
   { to: '/', label: 'Accueil' },
@@ -21,11 +21,23 @@ interface SiteHeaderProps {
 
 const SiteHeader = ({ active }: SiteHeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [dark, setDark] = useState<boolean>(
+    () => typeof document !== 'undefined' && document.documentElement.classList.contains('dark')
+  );
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', dark);
+    try {
+      localStorage.setItem('chr-theme', dark ? 'dark' : 'light');
+    } catch {
+      /* stockage indisponible */
+    }
+  }, [dark]);
 
   return (
     <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
       {/* Ruban certification ISO 9001 — toujours visible */}
-      <div className="bg-foreground text-white">
+      <div className="bg-medical-pine text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex items-center justify-center lg:justify-between gap-3">
           <div className="flex items-center gap-2 text-xs font-medium">
             <ShieldCheck className="w-4 h-4 text-amber-400 flex-shrink-0" />
@@ -71,6 +83,14 @@ const SiteHeader = ({ active }: SiteHeaderProps) => {
 
           {/* CTA */}
           <div className="hidden xl:flex items-center gap-3">
+            <button
+              onClick={() => setDark(d => !d)}
+              className="w-10 h-10 rounded-full border border-border bg-secondary/50 hover:bg-secondary flex items-center justify-center transition-colors cursor-pointer min-h-[40px] min-w-[40px]"
+              aria-label={dark ? 'Activer le mode clair' : 'Activer le mode sombre'}
+              title={dark ? 'Mode clair' : 'Mode sombre'}
+            >
+              {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
             <a
               href="tel:+237671440486"
               className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-medical-copper border border-medical-copper/40 rounded-full hover:bg-medical-copper/5 transition-colors duration-200 cursor-pointer min-h-[40px]"
@@ -115,6 +135,13 @@ const SiteHeader = ({ active }: SiteHeaderProps) => {
                 </Link>
               ))}
               <div className="flex flex-col gap-2 pt-3 border-t border-border mt-2">
+                <button
+                  onClick={() => setDark(d => !d)}
+                  className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground cursor-pointer min-h-[44px]"
+                >
+                  {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                  {dark ? 'Mode clair' : 'Mode sombre'}
+                </button>
                 <a href="tel:+237671440486" className="flex items-center gap-2 px-4 py-2.5 text-sm text-medical-copper font-semibold cursor-pointer min-h-[44px]">
                   <Phone className="w-4 h-4" /> +237 671 440 486 (Urgences)
                 </a>

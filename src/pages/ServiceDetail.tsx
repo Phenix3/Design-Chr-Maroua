@@ -110,7 +110,7 @@ const ServiceDetail = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground/50 via-transparent to-transparent" />
                   <div className="absolute bottom-4 left-4">
-                    <Badge className="bg-white/90 text-foreground border-0">{service.category}</Badge>
+                    <Badge className="bg-white/90 dark:bg-card/90 text-foreground border-0">{service.category}</Badge>
                   </div>
                 </div>
 
@@ -171,7 +171,7 @@ const ServiceDetail = () => {
           <div className="max-w-7xl mx-auto">
             <div className="flex items-end justify-between gap-6 mb-10">
               <div>
-                <Badge className="mb-3 bg-white text-medical-copper hover:bg-white uppercase tracking-[0.2em]">Dans le même pôle</Badge>
+                <Badge className="mb-3 bg-white text-medical-copper hover:bg-white dark:bg-secondary dark:text-medical-gold dark:hover:bg-secondary uppercase tracking-[0.2em]">Dans le même pôle</Badge>
                 <h2 className="text-3xl font-heading font-semibold text-foreground leading-tight">
                   Services associés
                 </h2>
@@ -232,7 +232,7 @@ const ServiceDetail = () => {
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link to="/contact">
-                <Button size="lg" className="bg-white text-foreground hover:bg-white/90 font-semibold min-h-[48px] shadow-lg rounded-full px-10 transition-colors duration-200">
+                <Button size="lg" className="bg-white text-medical-pine hover:bg-white/90 font-semibold min-h-[48px] shadow-lg rounded-full px-10 transition-colors duration-200">
                   <Mail className="w-5 h-5 mr-2" />
                   Nous contacter
                 </Button>

@@ -52,6 +52,21 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// Couleurs médicales CHR Maroua — via variables CSS pour le mode sombre
+				'medical-pine': 'hsl(var(--medical-pine) / <alpha-value>)',
+				'medical-copper': 'hsl(var(--medical-copper) / <alpha-value>)',
+				'medical-gold': 'hsl(var(--medical-gold) / <alpha-value>)',
+				'medical-cream': 'hsl(var(--medical-cream) / <alpha-value>)',
+				'medical-sand': 'hsl(var(--medical-sand) / <alpha-value>)',
+				'emergency-red': 'hsl(var(--emergency-red) / <alpha-value>)',
+				// rétrocompatibilité
+				'medical-teal': 'hsl(var(--medical-teal) / <alpha-value>)',
+				'medical-cyan': 'hsl(var(--medical-cyan) / <alpha-value>)',
+				'medical-green': 'hsl(var(--medical-green) / <alpha-value>)',
+				'medical-light-teal': 'hsl(var(--medical-light-teal) / <alpha-value>)',
+				'medical-gray': 'hsl(var(--medical-gray) / <alpha-value>)',
+				'medical-blue': 'hsl(var(--medical-blue) / <alpha-value>)',
+				'medical-light-blue': 'hsl(var(--medical-light-blue) / <alpha-value>)',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',

@@ -157,7 +157,7 @@ const QUALITE = () => (
     <section className="py-20 lg:py-24 bg-medical-sand px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="mb-12">
-          <Badge className="mb-4 bg-white text-medical-copper hover:bg-white uppercase tracking-[0.2em]">Notre système qualité</Badge>
+          <Badge className="mb-4 bg-white text-medical-copper hover:bg-white dark:bg-secondary dark:text-medical-gold dark:hover:bg-secondary uppercase tracking-[0.2em]">Notre système qualité</Badge>
           <h2 className="text-3xl lg:text-4xl font-heading font-semibold text-foreground leading-tight">
             Les piliers de notre management de la qualité
           </h2>
@@ -223,7 +223,7 @@ const QUALITE = () => (
     </section>
 
     {/* ── Parcours de certification ── */}
-    <section className="py-20 lg:py-24 bg-foreground text-white px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section className="py-20 lg:py-24 bg-medical-pine text-white px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <div className="absolute -top-40 -left-40 w-[28rem] h-[28rem] rounded-full bg-medical-copper/20 blur-3xl" aria-hidden="true" />
       <div className="absolute -bottom-40 -right-40 w-[28rem] h-[28rem] rounded-full bg-amber-500/15 blur-3xl" aria-hidden="true" />
       <div className="relative max-w-7xl mx-auto">
@@ -313,7 +313,7 @@ const QUALITE = () => (
                 </Button>
               </Link>
               <Link to="/rendez-vous">
-                <Button size="lg" variant="outline" className="cursor-pointer rounded-full border-2 border-foreground/20 hover:border-foreground hover:bg-foreground hover:text-white transition-colors min-h-[52px] px-10">
+                <Button size="lg" variant="outline" className="cursor-pointer rounded-full border-2 border-foreground/20 hover:border-foreground hover:bg-medical-pine hover:text-white transition-colors min-h-[52px] px-10">
                   <Calendar className="w-5 h-5 mr-2" />
                   Prendre Rendez-vous
                 </Button>

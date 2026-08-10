@@ -189,7 +189,7 @@ const Contact = () => {
               {/* Certification */}
               <Card className="border-amber-400/30 bg-amber-400/5">
                 <CardContent className="p-5 flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-full bg-amber-400/20 text-amber-600 flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-amber-400/20 text-amber-600 dark:text-amber-400 flex items-center justify-center flex-shrink-0">
                     <Award className="w-5 h-5" />
                   </div>
                   <div>

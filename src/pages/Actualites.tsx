@@ -71,7 +71,7 @@ const Actualites = () => {
               onClick={() => setActiveCategory(cat)}
               className={`px-5 py-2 rounded-full text-sm font-medium transition-colors duration-200 cursor-pointer min-h-[40px] ${
                 activeCategory === cat
-                  ? 'bg-foreground text-white shadow-sm'
+                  ? 'bg-medical-pine text-white shadow-sm'
                   : 'bg-secondary text-muted-foreground hover:text-foreground border border-border'
               }`}
             >

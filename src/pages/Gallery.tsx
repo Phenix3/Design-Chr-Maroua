@@ -89,7 +89,7 @@ const Gallery = () => {
               onClick={() => setActiveCategory(cat)}
               className={`px-5 py-2 rounded-full text-sm font-medium transition-colors duration-200 cursor-pointer min-h-[40px] ${
                 activeCategory === cat
-                  ? 'bg-foreground text-white shadow-sm'
+                  ? 'bg-medical-pine text-white shadow-sm'
                   : 'bg-secondary text-muted-foreground hover:text-foreground border border-border'
               }`}
             >
@@ -130,7 +130,7 @@ const Gallery = () => {
                   </div>
                 </div>
                 <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Badge className="bg-foreground/80 text-white border-0 text-xs">{item.category}</Badge>
+                  <Badge className="bg-medical-pine/80 text-white border-0 text-xs">{item.category}</Badge>
                 </div>
               </div>
             ))}
