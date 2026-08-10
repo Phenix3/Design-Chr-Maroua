@@ -1,0 +1,11 @@
+{
+  "name": "chr-maroua-style-system",
+  "version": "1.0.0",
+  "description": "Système de style exporté du projet Centre Hospitalier Moderne de Maroua",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7",
+    "autoprefixer": "^10.4.18",
+    "postcss": "^8.4.35"
+  }
+}
