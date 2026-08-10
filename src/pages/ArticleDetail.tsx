@@ -4,6 +4,14 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
+import {
   Calendar, Clock, ArrowRight, ArrowLeft, Phone, Tag, Newspaper, User,
   MessageCircle
 } from 'lucide-react';
@@ -70,13 +78,26 @@ const ArticleDetail = () => {
             {/* Texte */}
             <Reveal>
             <div>
-              <Link
-                to="/actualites"
-                className="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-medical-copper transition-colors cursor-pointer mb-8"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                Retour aux actualités
-              </Link>
+              {/* Fil d'Ariane */}
+              <Breadcrumb className="mb-8">
+                <BreadcrumbList>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink asChild>
+                      <Link to="/">Accueil</Link>
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbLink asChild>
+                      <Link to="/actualites">Actualités</Link>
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbPage>{article.titre}</BreadcrumbPage>
+                  </BreadcrumbItem>
+                </BreadcrumbList>
+              </Breadcrumb>
 
               <div className="relative rounded-[2rem] overflow-hidden border border-border shadow-lg mb-10 aspect-[16/9]">
                 <img
