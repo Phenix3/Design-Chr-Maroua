@@ -99,3 +99,6 @@ Thumbs.db
 # --- Uploaded Files ---
 uploaded_files/
 
+# --- Freebuff local runtime data ---
+.freebuff/
+
