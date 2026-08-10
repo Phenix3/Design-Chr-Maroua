@@ -11,6 +11,7 @@ import IsoSeal from '@/components/IsoSeal';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import PageHero from '@/components/PageHero';
+import Reveal from '@/components/Reveal';
 
 const QUALITY_PILLARS = [
   {
@@ -111,39 +112,43 @@ const QUALITE = () => (
     <section className="py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-14 lg:gap-20 items-center">
-          <div className="space-y-6">
-            <Badge className="bg-medical-copper/10 text-medical-copper hover:bg-medical-copper/10 uppercase tracking-[0.2em]">
-              Une reconnaissance internationale
-            </Badge>
-            <h2 className="text-3xl lg:text-4xl font-heading font-semibold text-foreground leading-tight">
-              Une exigence de qualité,{' '}
-              <em className="italic text-medical-copper">prouvée par un audit indépendant</em>
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Obtenir la certification ISO 9001:2015 n'est pas une fin en soi : c'est le fruit d'une
-              démarche rigoureuse menée par l'ensemble de nos équipes, du service des urgences à
-              l'administration. Chaque processus — accueil du patient, prise en charge, suivi,
-              facturation — a été revu, documenté et évalué selon les exigences de la norme.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              Cette certification confirme notre engagement pour des soins sûrs, efficaces et
-              centrés sur le patient, et nous engage à maintenir et améliorer en permanence la
-              qualité de nos services.
-            </p>
-            <Link to="/informations">
-              <Button size="lg" className="cursor-pointer medical-gradient text-white shadow-md hover:opacity-90 transition-opacity rounded-full px-10 min-h-[52px]">
-                Informations pratiques
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-            </Link>
-          </div>
-
-          <div className="flex justify-center">
-            <div className="relative">
-              <div className="absolute inset-6 bg-amber-400/25 rounded-full blur-3xl scale-125" aria-hidden="true" />
-              <IsoSeal size={260} className="drop-shadow-2xl" />
+          <Reveal>
+            <div className="space-y-6">
+              <Badge className="bg-medical-copper/10 text-medical-copper hover:bg-medical-copper/10 uppercase tracking-[0.2em]">
+                Une reconnaissance internationale
+              </Badge>
+              <h2 className="text-3xl lg:text-4xl font-heading font-semibold text-foreground leading-tight">
+                Une exigence de qualité,{' '}
+                <em className="italic text-medical-copper">prouvée par un audit indépendant</em>
+              </h2>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Obtenir la certification ISO 9001:2015 n'est pas une fin en soi : c'est le fruit d'une
+                démarche rigoureuse menée par l'ensemble de nos équipes, du service des urgences à
+                l'administration. Chaque processus — accueil du patient, prise en charge, suivi,
+                facturation — a été revu, documenté et évalué selon les exigences de la norme.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Cette certification confirme notre engagement pour des soins sûrs, efficaces et
+                centrés sur le patient, et nous engage à maintenir et améliorer en permanence la
+                qualité de nos services.
+              </p>
+              <Link to="/informations">
+                <Button size="lg" className="cursor-pointer medical-gradient text-white shadow-md hover:opacity-90 transition-opacity rounded-full px-10 min-h-[52px]">
+                  Informations pratiques
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+              </Link>
             </div>
-          </div>
+          </Reveal>
+
+          <Reveal delay={150}>
+            <div className="flex justify-center">
+              <div className="relative">
+                <div className="absolute inset-6 bg-amber-400/25 rounded-full blur-3xl scale-125" aria-hidden="true" />
+                <IsoSeal size={260} className="drop-shadow-2xl" />
+              </div>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>
@@ -161,13 +166,15 @@ const QUALITE = () => (
           {QUALITY_PILLARS.map((p, i) => {
             const Icon = p.icon;
             return (
-              <div key={i} className="bg-card border border-border rounded-2xl p-6 hover-lift">
-                <div className="w-12 h-12 rounded-full bg-medical-copper/10 text-medical-copper flex items-center justify-center mb-4">
-                  <Icon className="w-5 h-5" />
+              <Reveal key={i} delay={i * 80} className="h-full">
+                <div className="bg-card border border-border rounded-2xl p-6 hover-lift h-full">
+                  <div className="w-12 h-12 rounded-full bg-medical-copper/10 text-medical-copper flex items-center justify-center mb-4">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-heading font-semibold text-foreground text-lg mb-2">{p.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{p.description}</p>
                 </div>
-                <h3 className="font-heading font-semibold text-foreground text-lg mb-2">{p.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{p.description}</p>
-              </div>
+              </Reveal>
             );
           })}
         </div>
@@ -192,25 +199,24 @@ const QUALITE = () => (
 
         <div className="border-t border-border">
           {ENGAGEMENTS.map((e, i) => (
-            <div
-              key={i}
-              className="group grid md:grid-cols-[80px_1fr] items-start gap-4 md:gap-6 border-b border-border py-6 md:py-7 px-2 md:px-4 hover:bg-card transition-colors duration-200"
-            >
-              <span className="text-3xl font-heading font-semibold text-medical-copper/60 group-hover:text-medical-copper transition-colors">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-medical-copper/10 text-medical-copper flex items-center justify-center flex-shrink-0 mt-1 group-hover:bg-medical-copper group-hover:text-white transition-colors duration-200">
-                  <CheckCircle className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-heading font-semibold text-foreground mb-1 group-hover:text-medical-copper transition-colors">
-                    {e.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl">{e.description}</p>
+            <Reveal key={i} delay={i * 60}>
+              <div className="group grid md:grid-cols-[80px_1fr] items-start gap-4 md:gap-6 border-b border-border py-6 md:py-7 px-2 md:px-4 hover:bg-card transition-colors duration-200">
+                <span className="text-3xl font-heading font-semibold text-medical-copper/60 group-hover:text-medical-copper transition-colors">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-medical-copper/10 text-medical-copper flex items-center justify-center flex-shrink-0 mt-1 group-hover:bg-medical-copper group-hover:text-white transition-colors duration-200">
+                    <CheckCircle className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-heading font-semibold text-foreground mb-1 group-hover:text-medical-copper transition-colors">
+                      {e.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl">{e.description}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -236,7 +242,7 @@ const QUALITE = () => (
             const icons = [Search, Target, ClipboardCheck, ShieldCheck, RefreshCw];
             const Icon = icons[i];
             return (
-              <div key={i} className="relative">
+              <Reveal key={i} delay={i * 80} className="h-full">
                 <div className="bg-white/5 border border-white/10 rounded-2xl p-6 h-full hover:border-amber-400/30 transition-colors duration-200">
                   <div className="flex items-center justify-between mb-4">
                     <div className="w-11 h-11 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-md">
@@ -247,7 +253,7 @@ const QUALITE = () => (
                   <h3 className="font-heading font-semibold text-base mb-1">{s.title}</h3>
                   <p className="text-xs text-white/65 leading-relaxed">{s.description}</p>
                 </div>
-              </div>
+              </Reveal>
             );
           })}
         </div>
@@ -269,13 +275,15 @@ const QUALITE = () => (
           ].map((s, i) => {
             const Icon = s.icon;
             return (
-              <div key={i} className="text-center group">
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white/15 backdrop-blur-sm border border-white/25 mb-4 group-hover:scale-105 transition-transform">
-                  <Icon className="w-6 h-6" />
+              <Reveal key={i} delay={i * 80}>
+                <div className="text-center group">
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white/15 backdrop-blur-sm border border-white/25 mb-4 group-hover:scale-105 transition-transform">
+                    <Icon className="w-6 h-6" />
+                  </div>
+                  <div className="text-4xl font-heading font-semibold mb-1">{s.value}</div>
+                  <div className="text-white/80 text-sm">{s.label}</div>
                 </div>
-                <div className="text-4xl font-heading font-semibold mb-1">{s.value}</div>
-                <div className="text-white/80 text-sm">{s.label}</div>
-              </div>
+              </Reveal>
             );
           })}
         </div>
@@ -285,32 +293,34 @@ const QUALITE = () => (
     {/* ── CTA ── */}
     <section className="py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        <div className="relative bg-card border border-border rounded-[2rem] shadow-xl overflow-hidden px-8 py-14 lg:p-16 text-center">
-          <div className="absolute top-0 left-0 right-0 h-1.5 medical-gradient" aria-hidden="true" />
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full medical-gradient text-white mb-6 shadow-lg">
-            <ShieldCheck className="w-7 h-7" />
+        <Reveal>
+          <div className="relative bg-card border border-border rounded-[2rem] shadow-xl overflow-hidden px-8 py-14 lg:p-16 text-center">
+            <div className="absolute top-0 left-0 right-0 h-1.5 medical-gradient" aria-hidden="true" />
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full medical-gradient text-white mb-6 shadow-lg">
+              <ShieldCheck className="w-7 h-7" />
+            </div>
+            <h2 className="text-3xl lg:text-4xl font-heading font-semibold text-foreground mb-3">
+              Une question sur notre démarche qualité ?
+            </h2>
+            <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-base leading-relaxed">
+              Notre équipe vous renseigne sur la certification ISO 9001 et sur toutes nos activités de soins.
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Link to="/contact">
+                <Button size="lg" className="cursor-pointer medical-gradient text-white hover:opacity-90 transition-opacity shadow-lg font-semibold min-h-[52px] rounded-full px-10">
+                  <Phone className="w-5 h-5 mr-2" />
+                  Nous Contacter
+                </Button>
+              </Link>
+              <Link to="/rendez-vous">
+                <Button size="lg" variant="outline" className="cursor-pointer rounded-full border-2 border-foreground/20 hover:border-foreground hover:bg-foreground hover:text-white transition-colors min-h-[52px] px-10">
+                  <Calendar className="w-5 h-5 mr-2" />
+                  Prendre Rendez-vous
+                </Button>
+              </Link>
+            </div>
           </div>
-          <h2 className="text-3xl lg:text-4xl font-heading font-semibold text-foreground mb-3">
-            Une question sur notre démarche qualité ?
-          </h2>
-          <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-base leading-relaxed">
-            Notre équipe vous renseigne sur la certification ISO 9001 et sur toutes nos activités de soins.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/contact">
-              <Button size="lg" className="cursor-pointer medical-gradient text-white hover:opacity-90 transition-opacity shadow-lg font-semibold min-h-[52px] rounded-full px-10">
-                <Phone className="w-5 h-5 mr-2" />
-                Nous Contacter
-              </Button>
-            </Link>
-            <Link to="/rendez-vous">
-              <Button size="lg" variant="outline" className="cursor-pointer rounded-full border-2 border-foreground/20 hover:border-foreground hover:bg-foreground hover:text-white transition-colors min-h-[52px] px-10">
-                <Calendar className="w-5 h-5 mr-2" />
-                Prendre Rendez-vous
-              </Button>
-            </Link>
-          </div>
-        </div>
+        </Reveal>
       </div>
     </section>
 
