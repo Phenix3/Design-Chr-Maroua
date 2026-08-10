@@ -6,9 +6,11 @@ import type { LucideIcon } from 'lucide-react';
 import {
   Stethoscope, Calendar, Phone, Users, Award, Heart, Shield,
   Activity, Ambulance, UserCheck, ArrowRight, Clock3, Microscope,
-  Baby, ShieldCheck, ClipboardCheck, TrendingUp, ChevronLeft, ChevronRight
+  Baby, ShieldCheck, ClipboardCheck, TrendingUp, ChevronLeft, ChevronRight,
+  Newspaper
 } from 'lucide-react';
 import { IMAGES } from '@/assets/images';
+import { articles } from '@/lib/articles';
 import IsoSeal from '@/components/IsoSeal';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
@@ -114,6 +116,8 @@ const HERO_SLIDES: {
 const Index = () => {
   const [heroIndex, setHeroIndex] = useState(0);
   const [heroPaused, setHeroPaused] = useState(false);
+  const [actusIndex, setActusIndex] = useState(0);
+  const [actusPaused, setActusPaused] = useState(false);
 
   // Autoplay du carrousel — 7s par diapositive, désactivé au survol et en reduced-motion
   useEffect(() => {
@@ -122,6 +126,14 @@ const Index = () => {
     const id = setInterval(() => setHeroIndex(i => (i + 1) % HERO_SLIDES.length), 7000);
     return () => clearInterval(id);
   }, [heroPaused]);
+
+  // Autoplay du carrousel Actualités — 8s, mêmes règles d'accessibilité
+  useEffect(() => {
+    if (actusPaused) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const id = setInterval(() => setActusIndex(i => (i + 1) % articles.length), 8000);
+    return () => clearInterval(id);
+  }, [actusPaused]);
 
   const services = [
     { icon: Ambulance, title: 'Urgences 24h/24', description: 'Prise en charge immédiate pour toute urgence médicale, disponible en permanence.' },
@@ -506,6 +518,100 @@ const Index = () => {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* ===== Actualités — carrousel des derniers articles ===== */}
+      <section className="py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+            <div>
+              <Badge className="mb-4 bg-secondary text-medical-copper hover:bg-secondary uppercase tracking-[0.2em]">Actualités</Badge>
+              <h2 className="text-3xl lg:text-5xl font-heading font-semibold text-foreground leading-tight">
+                Les dernières <em className="italic text-medical-copper">actualités</em> du CHR
+              </h2>
+            </div>
+            <Link to="/actualites" className="group inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-medical-copper transition-colors cursor-pointer">
+              Toutes les actualités
+              <ArrowRight className="w-4 h-4 text-medical-copper group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          <Reveal>
+          <div
+            className="relative bg-card border border-border rounded-[2rem] shadow-xl overflow-hidden"
+            onMouseEnter={() => setActusPaused(true)}
+            onMouseLeave={() => setActusPaused(false)}
+          >
+            {/* Carte article — diapositive active */}
+            <div key={`actus-${actusIndex}`} className="animate-fade-in grid md:grid-cols-2">
+              <div className="relative h-64 md:h-auto min-h-[300px]">
+                <img
+                  src={articles[actusIndex].image}
+                  alt={articles[actusIndex].titre}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-foreground/50 via-transparent to-transparent" />
+                <Badge className="absolute top-4 left-4 bg-card/95 text-medical-copper dark:text-medical-gold border-0">
+                  {articles[actusIndex].categorie}
+                </Badge>
+              </div>
+              <div className="p-8 lg:p-12 flex flex-col justify-center">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground mb-3">
+                  <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" /> {articles[actusIndex].date}</span>
+                  <span className="flex items-center gap-1.5"><Newspaper className="w-3.5 h-3.5" /> {articles[actusIndex].auteur}</span>
+                </div>
+                <h3 className="text-2xl lg:text-3xl font-heading font-semibold text-foreground mb-4 leading-snug">
+                  {articles[actusIndex].titre}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed mb-8">
+                  {articles[actusIndex].extrait}
+                </p>
+                <div>
+                  <Link to="/actualites">
+                    <Button className="cursor-pointer medical-gradient text-white rounded-full px-8 min-h-[48px] hover:opacity-90 transition-opacity font-semibold">
+                      Lire la suite
+                      <ArrowRight className="w-4 h-4 ml-1" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Contrôles du carrousel */}
+            <div className="relative flex items-center justify-center gap-5 py-5 border-t border-border bg-card">
+              <button
+                onClick={() => setActusIndex(i => (i - 1 + articles.length) % articles.length)}
+                aria-label="Article précédent"
+                className="w-11 h-11 rounded-full border border-border bg-background hover:bg-secondary flex items-center justify-center transition-colors cursor-pointer min-h-[44px] min-w-[44px]"
+              >
+                <ChevronLeft className="w-5 h-5 text-foreground" />
+              </button>
+              <div className="flex items-center gap-2.5" role="tablist" aria-label="Articles">
+                {articles.map((a, i) => (
+                  <button
+                    key={a.id}
+                    onClick={() => setActusIndex(i)}
+                    role="tab"
+                    aria-selected={actusIndex === i}
+                    aria-label={`Article ${i + 1} : ${a.titre}`}
+                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer min-h-[6px] ${
+                      actusIndex === i ? 'w-10 bg-medical-copper' : 'w-5 bg-foreground/20 hover:bg-foreground/40'
+                    }`}
+                  />
+                ))}
+              </div>
+              <button
+                onClick={() => setActusIndex(i => (i + 1) % articles.length)}
+                aria-label="Article suivant"
+                className="w-11 h-11 rounded-full border border-border bg-background hover:bg-secondary flex items-center justify-center transition-colors cursor-pointer min-h-[44px] min-w-[44px]"
+              >
+                <ChevronRight className="w-5 h-5 text-foreground" />
+              </button>
+            </div>
+          </div>
+          </Reveal>
         </div>
       </section>
 
