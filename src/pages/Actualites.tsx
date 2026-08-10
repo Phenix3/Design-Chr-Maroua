@@ -17,7 +17,6 @@ const categories = ['Tous', 'Santé Publique', 'Cardiologie'];
 
 const Actualites = () => {
   const [activeCategory, setActiveCategory] = useState('Tous');
-  const [expandedId, setExpandedId] = useState<number | null>(null);
 
   const filtered = activeCategory === 'Tous'
     ? articles
@@ -65,12 +64,12 @@ const Actualites = () => {
             <p className="text-center text-muted-foreground py-12">Aucun article dans cette catégorie.</p>
           )}
           {filtered.map(article => (
-            <Card key={article.id} className="overflow-hidden border-border shadow-sm hover:shadow-lg transition-shadow duration-300">
+            <Card key={article.id} className="overflow-hidden border-border shadow-sm hover:shadow-lg transition-shadow duration-300 group">
               <div className="md:flex">
-                <div className="md:w-72 flex-shrink-0 relative">
-                  <img src={article.image} alt={article.titre} loading="lazy" className="w-full h-52 md:h-full object-cover" />
+                <Link to={`/actualites/${article.slug}`} className="md:w-72 flex-shrink-0 relative block overflow-hidden cursor-pointer">
+                  <img src={article.image} alt={article.titre} loading="lazy" className="w-full h-52 md:h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-foreground/40 to-transparent" />
-                </div>
+                </Link>
                 <CardContent className="flex-1 p-6">
                   <div className="flex flex-wrap items-center gap-3 mb-3">
                     <Badge className="bg-medical-copper/10 text-medical-copper hover:bg-medical-copper/10 border-0 text-xs">
@@ -79,9 +78,11 @@ const Actualites = () => {
                     <span className="flex items-center gap-1 text-xs text-muted-foreground"><Calendar className="w-3 h-3" /> {article.date}</span>
                     <span className="flex items-center gap-1 text-xs text-muted-foreground"><Clock className="w-3 h-3" /> {article.auteur}</span>
                   </div>
-                  <h2 className="text-xl font-heading font-semibold text-foreground mb-3 leading-snug">{article.titre}</h2>
+                  <Link to={`/actualites/${article.slug}`} className="block cursor-pointer">
+                    <h2 className="text-xl font-heading font-semibold text-foreground mb-3 leading-snug group-hover:text-medical-copper transition-colors">{article.titre}</h2>
+                  </Link>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                    {expandedId === article.id ? article.contenu : article.extrait}
+                    {article.extrait}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-5">
                     {article.tags.map(tag => (
@@ -90,15 +91,12 @@ const Actualites = () => {
                       </span>
                     ))}
                   </div>
-                  <Button
-                    variant={expandedId === article.id ? 'outline' : 'default'}
-                    size="sm"
-                    onClick={() => setExpandedId(expandedId === article.id ? null : article.id)}
-                    className="cursor-pointer min-h-[40px] rounded-full px-6"
-                  >
-                    {expandedId === article.id ? 'Réduire' : 'Lire la suite'}
-                    <ArrowRight className="w-3 h-3 ml-1" />
-                  </Button>
+                  <Link to={`/actualites/${article.slug}`}>
+                    <Button size="sm" className="cursor-pointer min-h-[40px] rounded-full px-6">
+                      Lire la suite
+                      <ArrowRight className="w-3 h-3 ml-1" />
+                    </Button>
+                  </Link>
                 </CardContent>
               </div>
             </Card>

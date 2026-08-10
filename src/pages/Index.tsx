@@ -569,7 +569,7 @@ const Index = () => {
                   {articles[actusIndex].extrait}
                 </p>
                 <div>
-                  <Link to="/actualites">
+                  <Link to={`/actualites/${articles[actusIndex].slug}`}>
                     <Button className="cursor-pointer medical-gradient text-white rounded-full px-8 min-h-[48px] hover:opacity-90 transition-opacity font-semibold">
                       Lire la suite
                       <ArrowRight className="w-4 h-4 ml-1" />

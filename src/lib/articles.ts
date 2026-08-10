@@ -2,6 +2,7 @@ import { IMAGES } from '@/assets/images';
 
 export interface Article {
   id: number;
+  slug: string;
   titre: string;
   date: string;
   categorie: string;
@@ -15,6 +16,7 @@ export interface Article {
 export const articles: Article[] = [
   {
     id: 1,
+    slug: 'campagne-sante-gratuite-extreme-nord-2025',
     titre: 'Campagne de santé gratuite Extrême-Nord 2025',
     date: '18 juin 2025',
     categorie: 'Santé Publique',
@@ -26,6 +28,7 @@ export const articles: Article[] = [
   },
   {
     id: 2,
+    slug: 'departement-cardiologie-services-medicaux',
     titre: 'Département de Cardiologie — Nos Services Médicaux',
     date: '4 avril 2025',
     categorie: 'Cardiologie',
