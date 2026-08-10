@@ -2,94 +2,98 @@
 @tailwind components;
 @tailwind utilities;
 
-/* CHR Maroua — Design System */
-/* Palette médicale teal — Accessible & Ethical (WCAG AAA) */
+/* CHR Maroua — Design System « Clinique Éditoriale »
+   Palette : ivoire chaud · pin profond · cuivre · or champagne
+   Typographie : Fraunces (titres serif) · Inter (texte) */
 
 @layer base {
   :root {
-    --background: 166 100% 97%; /* #F0FDFA mint */
-    --foreground: 174 62% 18%; /* #134E4A dark teal */
+    --background: 36 33% 96%; /* #F6F2EA ivoire */
+    --foreground: 158 43% 17%; /* #1B4332 pin profond */
 
-    --card: 0 0% 100%;
-    --card-foreground: 174 62% 18%;
+    --card: 40 30% 99%;
+    --card-foreground: 158 43% 17%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 174 62% 18%;
+    --popover: 40 30% 99%;
+    --popover-foreground: 158 43% 17%;
 
     /* Couleurs médicales CHR Maroua */
-    --primary: 192 91% 36%; /* #0891B2 medical teal */
-    --primary-foreground: 0 0% 100%;
+    --primary: 158 43% 17%; /* pin */
+    --primary-foreground: 36 33% 96%;
 
-    --medical-teal: 192 91% 36%;     /* #0891B2 */
-    --medical-cyan: 187 96% 60%;     /* #22D3EE */
-    --medical-green: 142 69% 45%;    /* #22C55E CTA green */
-    --medical-light-teal: 166 100% 97%; /* #F0FDFA */
-    --medical-gray: 180 6% 96%;      /* neutral sections */
+    --medical-pine: 158 43% 17%;
+    --medical-copper: 14 56% 42%; /* #A7502F cuivre */
+    --medical-gold: 38 82% 46%; /* #C9921F or champagne */
+    --medical-cream: 36 33% 96%;
+    --medical-sand: 33 25% 91%;
+
+    /* rétrocompatibilité */
+    --medical-teal: 158 43% 17%;
+    --medical-cyan: 24 55% 68%;
+    --medical-green: 14 56% 42%;
+    --medical-light-teal: 36 33% 96%;
+    --medical-gray: 33 25% 91%;
+    --medical-blue: 158 43% 17%;
+    --medical-light-blue: 36 33% 96%;
     --emergency-red: 0 84% 60%;
 
-    --secondary: 187 60% 94%;
-    --secondary-foreground: 174 62% 18%;
+    --secondary: 33 25% 91%;
+    --secondary-foreground: 158 43% 17%;
 
-    --muted: 180 20% 95%;
-    --muted-foreground: 174 30% 40%;
+    --muted: 36 20% 93%;
+    --muted-foreground: 156 12% 38%;
 
-    --accent: 187 60% 94%;
-    --accent-foreground: 174 62% 18%;
+    --accent: 33 25% 91%;
+    --accent-foreground: 158 43% 17%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 187 40% 88%;
-    --input: 187 40% 88%;
-    --ring: 192 91% 36%;
+    --border: 33 20% 85%;
+    --input: 33 20% 85%;
+    --ring: 158 43% 17%;
 
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 158 43% 8%;
+    --foreground: 36 33% 96%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 158 43% 10%;
+    --card-foreground: 36 33% 96%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 158 43% 10%;
+    --popover-foreground: 36 33% 96%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 36 33% 96%;
+    --primary-foreground: 158 43% 17%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 158 30% 16%;
+    --secondary-foreground: 36 33% 96%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 158 30% 16%;
+    --muted-foreground: 30 20% 70%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 158 30% 16%;
+    --accent-foreground: 36 33% 96%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 158 30% 20%;
+    --input: 158 30% 20%;
+    --ring: 36 33% 70%;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -102,15 +106,20 @@
 }
 
 @theme inline {
-  --color-medical-teal: hsl(192 91% 36%);
-  --color-medical-cyan: hsl(187 96% 60%);
-  --color-medical-green: hsl(142 69% 45%);
-  --color-medical-light-teal: hsl(166 100% 97%);
-  --color-medical-gray: hsl(180 6% 96%);
+  --color-medical-pine: hsl(158 43% 17%);
+  --color-medical-copper: hsl(14 56% 42%);
+  --color-medical-gold: hsl(38 82% 46%);
+  --color-medical-cream: hsl(36 33% 96%);
+  --color-medical-sand: hsl(33 25% 91%);
   --color-emergency-red: hsl(0 84% 60%);
   /* rétrocompatibilité */
-  --color-medical-blue: hsl(192 91% 36%);
-  --color-medical-light-blue: hsl(166 100% 97%);
+  --color-medical-teal: hsl(158 43% 17%);
+  --color-medical-cyan: hsl(24 55% 68%);
+  --color-medical-green: hsl(14 56% 42%);
+  --color-medical-light-teal: hsl(36 33% 96%);
+  --color-medical-gray: hsl(33 25% 91%);
+  --color-medical-blue: hsl(158 43% 17%);
+  --color-medical-light-blue: hsl(36 33% 96%);
 }
 
 @layer base {
@@ -120,35 +129,49 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Figtree', 'Noto Sans', sans-serif;
+    font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  /* La classe font-heading devient un vrai utilitaire serif */
+  .font-heading {
+    font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+    letter-spacing: -0.015em;
   }
 
   .medical-gradient {
-    background: linear-gradient(135deg, hsl(192 91% 36%) 0%, hsl(187 96% 60%) 100%);
+    background: linear-gradient(135deg, hsl(158 43% 17%) 0%, hsl(14 56% 44%) 100%);
   }
 
   .medical-gradient-green {
-    background: linear-gradient(135deg, hsl(192 91% 36%) 0%, hsl(142 69% 45%) 100%);
+    background: linear-gradient(135deg, hsl(158 43% 17%) 0%, hsl(38 82% 42%) 100%);
   }
 
   .hero-pattern {
-    background-image: radial-gradient(circle at 25% 25%, hsl(166 100% 97%) 0%, transparent 50%),
-                      radial-gradient(circle at 75% 75%, hsl(187 60% 94%) 0%, transparent 50%);
+    background-image: radial-gradient(circle at 20% 20%, hsl(33 25% 91%) 0%, transparent 55%),
+                      radial-gradient(circle at 85% 80%, hsl(33 25% 91%) 0%, transparent 55%);
   }
-  
+
+  /* Titre géant en contour (filigrane éditorial) */
+  .text-outline {
+    -webkit-text-stroke: 1.5px hsl(158 43% 17%);
+    color: transparent;
+  }
+
   /* Carousel Animations */
   .animate-fade-in {
     animation: fadeIn 1s ease-out;
   }
-  
+
   .animate-slide-up {
     animation: slideUp 0.8s ease-out;
   }
-  
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -159,7 +182,7 @@
       transform: translateY(0);
     }
   }
-  
+
   @keyframes slideUp {
     from {
       opacity: 0;
@@ -170,12 +193,12 @@
       transform: translateY(0);
     }
   }
-  
+
   /* Carousel slide transitions */
   .carousel-slide {
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   /* Hover effects */
   .hover-lift {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -183,7 +206,7 @@
 
   .hover-lift:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(8, 145, 178, 0.15);
+    box-shadow: 0 8px 24px rgba(27, 67, 50, 0.15);
   }
 
   /* Sceau ISO 9001 — rotation lente de l'anneau de texte */
@@ -216,12 +239,27 @@
     animation: floatY 5s ease-in-out infinite;
   }
 
+  /* Ticker défilant (ruban éditorial) */
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
   /* Accessibility — reduced motion */
   @media (prefers-reduced-motion: reduce) {
     .animate-fade-in,
     .animate-slide-up,
     .animate-spin-slow,
-    .animate-float {
+    .animate-float,
+    .animate-marquee {
       animation: none;
       opacity: 1;
       transform: none;
@@ -234,7 +272,7 @@
 
   /* Focus rings visibles */
   :focus-visible {
-    outline: 3px solid hsl(192 91% 36%);
+    outline: 3px solid hsl(14 56% 42%);
     outline-offset: 2px;
   }
 }

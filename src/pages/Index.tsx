@@ -1,14 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import {
-  Calendar, Clock, Phone, MapPin, Mail, Users, Award, Heart, Shield,
-  Stethoscope, Activity, Ambulance, UserCheck, Menu, X, CheckCircle,
-  ArrowRight, ChevronLeft, ChevronRight, Clock3, HeartPulse, Microscope,
-  Baby, Facebook, Youtube, MessageCircle, ShieldCheck, BadgeCheck,
-  ClipboardCheck, TrendingUp, Medal
+  Stethoscope, Calendar, Phone, MapPin, Mail, Users, Award, Heart, Shield,
+  Activity, Ambulance, UserCheck, Menu, X, ArrowRight, Clock3, Microscope,
+  Baby, Facebook, Youtube, MessageCircle, ShieldCheck, ClipboardCheck,
+  TrendingUp, Sparkles
 } from 'lucide-react';
 import { IMAGES } from '@/assets/images';
 import IsoSeal from '@/components/IsoSeal';
@@ -23,100 +21,26 @@ const NAV_LINKS = [
   { to: '/informations', label: 'Informations' },
 ];
 
+const TICKER_ITEMS = [
+  'Sécurité',
+  'Qualité',
+  'Humanisation',
+  'Certifié ISO 9001:2015',
+  '28 Spécialités',
+  'Urgences 24h/24',
+  '13 Médecins Spécialistes',
+];
+
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  const carouselSlides = [
-    {
-      id: 1,
-      title: 'Sécurité',
-      titleHighlight: '· Qualité · Humanisation',
-      subtitle: 'Centre Hospitalier Régional de Maroua',
-      description: 'Établissement de santé de référence en Extrême-Nord du Cameroun. Une équipe dévouée vous accompagne à chaque étape de votre parcours de soins.',
-      image: IMAGES.HOSPITAL_EXTERIOR_8,
-      gradient: 'from-cyan-700 via-teal-600 to-cyan-500',
-      stats: [
-        { icon: Stethoscope, value: '28+', label: 'Spécialités' },
-        { icon: Award, value: '2024', label: 'Opérationnel depuis' },
-        { icon: Clock3, value: '24/7', label: 'Urgences' },
-      ],
-    },
-    {
-      id: 2,
-      title: 'Équipements',
-      titleHighlight: 'Modernes',
-      subtitle: 'Innovation & Précision Médicale',
-      description: 'Imagerie médicale haute définition, bloc opératoire moderne, laboratoire d\'ANAPATH — des technologies adaptées pour des diagnostics précis.',
-      image: IMAGES.MEDICAL_EQUIPMENT_1,
-      gradient: 'from-teal-700 via-cyan-600 to-teal-500',
-      stats: [
-        { icon: Microscope, value: 'Labo', label: 'ANAPATH' },
-        { icon: Activity, value: 'Bloc', label: 'Opératoire' },
-        { icon: HeartPulse, value: 'Cardio', label: 'Cardiologie' },
-      ],
-    },
-    {
-      id: 3,
-      title: 'Équipe',
-      titleHighlight: 'de Spécialistes',
-      subtitle: 'Professionnels Engagés',
-      description: 'Des médecins spécialistes et une équipe pluridisciplinaire dévoués à vous offrir les meilleurs soins avec compassion et humanisme.',
-      image: IMAGES.MEDICAL_TEAM_6,
-      gradient: 'from-emerald-700 via-teal-600 to-emerald-500',
-      stats: [
-        { icon: UserCheck, value: '13+', label: 'Médecins spécialistes' },
-        { icon: Users, value: '28', label: 'Spécialités couvertes' },
-        { icon: Heart, value: '500k+', label: 'Patients (campagne 2025)' },
-      ],
-    },
-    {
-      id: 4,
-      title: 'Urgences',
-      titleHighlight: '24h/24',
-      subtitle: 'Toujours à Votre Service',
-      description: 'Service d\'urgences disponible en permanence. Appelez le +237 671 440 486 pour toute urgence médicale.',
-      image: IMAGES.HOSPITAL_INTERIOR_8,
-      gradient: 'from-red-700 via-rose-600 to-red-500',
-      stats: [
-        { icon: Ambulance, value: '24/7', label: 'Disponible' },
-        { icon: HeartPulse, value: '+237', label: '671 440 486' },
-        { icon: Phone, value: 'SAMU', label: 'Cameroun' },
-      ],
-    },
-  ];
-
-  const handleNext = useCallback(() => {
-    if (!isAnimating) {
-      setIsAnimating(true);
-      setCurrentSlide(prev => (prev + 1) % carouselSlides.length);
-      setTimeout(() => setIsAnimating(false), 500);
-    }
-  }, [isAnimating, carouselSlides.length]);
-
-  const handlePrev = useCallback(() => {
-    if (!isAnimating) {
-      setIsAnimating(true);
-      setCurrentSlide(prev => (prev - 1 + carouselSlides.length) % carouselSlides.length);
-      setTimeout(() => setIsAnimating(false), 500);
-    }
-  }, [isAnimating, carouselSlides.length]);
-
-  useEffect(() => {
-    const timer = setInterval(() => handleNext(), 7000);
-    return () => clearInterval(timer);
-  }, [handleNext]);
-
-  const slide = carouselSlides[currentSlide];
 
   const services = [
-    { icon: Ambulance, title: 'Urgences 24h/24', description: 'Prise en charge immédiate pour toute urgence médicale, disponible en permanence.', color: 'from-red-500 to-rose-500' },
-    { icon: Heart, title: 'Cardiologie', description: 'Prévention, diagnostic et traitement de toutes les maladies du cœur et des vaisseaux.', color: 'from-cyan-600 to-teal-500' },
-    { icon: Baby, title: 'Gynécologie-Obstétrique', description: 'Suivi de grossesse, accouchement et soins gynécologiques spécialisés.', color: 'from-pink-500 to-rose-400' },
-    { icon: Users, title: 'Pédiatrie', description: 'Soins spécialisés pour les nourrissons, enfants et adolescents.', color: 'from-emerald-500 to-teal-500' },
-    { icon: Activity, title: 'Orthopédie-Traumatologie', description: 'Prise en charge des fractures, traumatismes et pathologies ostéo-articulaires.', color: 'from-orange-500 to-amber-400' },
-    { icon: Microscope, title: 'Imagerie Médicale', description: 'Radiologie, échographie et examens d\'imagerie pour des diagnostics précis.', color: 'from-teal-600 to-cyan-500' },
+    { icon: Ambulance, title: 'Urgences 24h/24', description: 'Prise en charge immédiate pour toute urgence médicale, disponible en permanence.' },
+    { icon: Heart, title: 'Cardiologie', description: 'Prévention, diagnostic et traitement de toutes les maladies du cœur et des vaisseaux.' },
+    { icon: Baby, title: 'Gynécologie-Obstétrique', description: 'Suivi de grossesse, accouchement et soins gynécologiques spécialisés.' },
+    { icon: Users, title: 'Pédiatrie', description: 'Soins spécialisés pour les nourrissons, enfants et adolescents.' },
+    { icon: Activity, title: 'Orthopédie-Traumatologie', description: 'Prise en charge des fractures, traumatismes et pathologies ostéo-articulaires.' },
+    { icon: Microscope, title: 'Imagerie Médicale', description: 'Radiologie, échographie et examens d\'imagerie pour des diagnostics précis.' },
   ];
 
   const features = [
@@ -130,13 +54,31 @@ const Index = () => {
     { value: '28+', label: 'Spécialités médicales', icon: Stethoscope },
     { value: '13+', label: 'Médecins spécialistes', icon: UserCheck },
     { value: '24/7', label: 'Urgences disponibles', icon: Clock3 },
-    { value: 'ISO 9001', label: 'Qualité certifiée (2015)', icon: Medal },
+    { value: 'ISO 9001', label: 'Qualité certifiée (2015)', icon: Award },
+  ];
+
+  const isoPillars = [
+    {
+      icon: ShieldCheck,
+      title: 'Management de la Qualité',
+      description: 'Processus maîtrisés, documentés et tracés sur l\'ensemble de nos activités.',
+    },
+    {
+      icon: ClipboardCheck,
+      title: 'Exigences Auditées',
+      description: 'Conformité vérifiée par un organisme certificateur externe indépendant.',
+    },
+    {
+      icon: TrendingUp,
+      title: 'Amélioration Continue',
+      description: 'Un engagement permanent pour des soins toujours plus sûrs et efficaces.',
+    },
   ];
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border shadow-sm">
+      {/* ===== Header ===== */}
+      <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
         {/* Ruban certification ISO 9001 — toujours visible */}
         <div className="bg-foreground text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex items-center justify-center lg:justify-between gap-3">
@@ -146,31 +88,32 @@ const Index = () => {
               <span className="hidden sm:inline text-white/60">· Système de Management de la Qualité</span>
             </div>
             <div className="hidden lg:flex items-center gap-1.5 text-xs text-amber-300">
-              <BadgeCheck className="w-4 h-4" />
+              <Sparkles className="w-4 h-4" />
               <span>Agrément obtenu — Qualité certifiée</span>
             </div>
           </div>
         </div>
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-18 py-3">
+          <div className="flex justify-between items-center h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center space-x-3 cursor-pointer group">
-              <div className="w-11 h-11 medical-gradient rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
-                <Stethoscope className="w-6 h-6 text-white" />
+            <Link to="/" className="flex items-center gap-3 cursor-pointer group">
+              <div className="w-11 h-11 medical-gradient rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+                <Stethoscope className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h1 className="text-base font-bold text-foreground font-heading leading-tight">CHR Maroua</h1>
-                <p className="text-xs text-muted-foreground">Sécurité · Qualité · Humanisation</p>
+                <h1 className="text-lg font-heading font-semibold text-foreground leading-tight">CHR Maroua</h1>
+                <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">Sécurité · Qualité · Humanisation</p>
               </div>
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center space-x-1">
+            <nav className="hidden lg:flex items-center gap-1">
               {NAV_LINKS.map(link => (
                 <Link
                   key={link.to}
                   to={link.to}
-                  className="px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-primary hover:bg-secondary transition-colors duration-200 cursor-pointer font-medium"
+                  className="px-3 py-2 rounded-full text-[13px] uppercase tracking-wider text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors duration-200 cursor-pointer font-medium"
                 >
                   {link.label}
                 </Link>
@@ -178,16 +121,16 @@ const Index = () => {
             </nav>
 
             {/* CTA */}
-            <div className="hidden lg:flex items-center space-x-3">
+            <div className="hidden lg:flex items-center gap-3">
               <a
                 href="tel:+237671440486"
-                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-emergency-red border border-emergency-red/30 rounded-lg hover:bg-emergency-red/5 transition-colors duration-200 cursor-pointer min-h-[40px]"
+                className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-medical-copper border border-medical-copper/40 rounded-full hover:bg-medical-copper/5 transition-colors duration-200 cursor-pointer min-h-[40px]"
               >
                 <Phone className="w-4 h-4" />
                 Urgences
               </a>
               <Link to="/rendez-vous">
-                <Button className="cursor-pointer medical-gradient text-white shadow-md hover:shadow-lg hover:opacity-90 transition-all min-h-[40px]">
+                <Button className="cursor-pointer medical-gradient text-white shadow-md hover:shadow-lg hover:opacity-90 transition-all min-h-[40px] rounded-full px-6">
                   <Calendar className="w-4 h-4 mr-2" />
                   Rendez-vous
                 </Button>
@@ -197,7 +140,7 @@ const Index = () => {
             {/* Mobile menu */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 rounded-lg hover:bg-secondary transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
+              className="lg:hidden p-2 rounded-full hover:bg-secondary transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
             >
               {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -207,23 +150,23 @@ const Index = () => {
           {/* Mobile Nav */}
           {isMenuOpen && (
             <div className="lg:hidden py-3 border-t border-border">
-              <nav className="flex flex-col space-y-1">
+              <nav className="flex flex-col gap-1">
                 {NAV_LINKS.map(link => (
                   <Link
                     key={link.to}
                     to={link.to}
-                    className="px-3 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-primary hover:bg-secondary transition-colors cursor-pointer"
+                    className="px-4 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors cursor-pointer uppercase tracking-wider"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.label}
                   </Link>
                 ))}
                 <div className="flex flex-col gap-2 pt-3 border-t border-border mt-2">
-                  <a href="tel:+237671440486" className="flex items-center gap-2 px-3 py-2.5 text-sm text-emergency-red font-medium cursor-pointer min-h-[44px]">
+                  <a href="tel:+237671440486" className="flex items-center gap-2 px-4 py-2.5 text-sm text-medical-copper font-semibold cursor-pointer min-h-[44px]">
                     <Phone className="w-4 h-4" /> +237 671 440 486 (Urgences)
                   </a>
                   <Link to="/rendez-vous" onClick={() => setIsMenuOpen(false)}>
-                    <Button className="w-full cursor-pointer medical-gradient text-white min-h-[44px]">
+                    <Button className="w-full cursor-pointer medical-gradient text-white min-h-[44px] rounded-full">
                       <Calendar className="w-4 h-4 mr-2" /> Prendre Rendez-vous
                     </Button>
                   </Link>
@@ -234,145 +177,120 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Hero Carousel */}
+      {/* ===== Hero éditorial ===== */}
       <section className="relative overflow-hidden">
-        <div className="relative h-[88vh] min-h-[580px]">
-          <div className={`absolute inset-0 bg-gradient-to-br ${slide.gradient} transition-all duration-1000`}>
-            <div className="absolute inset-0 opacity-10" style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }} />
-          </div>
+        {/* Décor de fond */}
+        <div className="absolute inset-0 hero-pattern" aria-hidden="true" />
+        <div className="absolute -top-32 right-[-8%] w-[38rem] h-[38rem] rounded-full bg-medical-copper/10 blur-3xl" aria-hidden="true" />
+        <div className="absolute bottom-[-10%] left-[-6%] w-[30rem] h-[30rem] rounded-full bg-foreground/10 blur-3xl" aria-hidden="true" />
+        {/* Filigrane éditorial */}
+        <span
+          className="absolute bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap text-[18vw] lg:text-[13vw] leading-none font-heading font-bold text-outline opacity-[0.07] select-none pointer-events-none"
+          aria-hidden="true"
+        >
+          Maroua
+        </span>
 
-          <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-10 items-center h-full py-12">
-              {/* Text */}
-              <div className={`space-y-7 text-white transition-all duration-500 ${isAnimating ? 'opacity-0 -translate-x-4' : 'opacity-100 translate-x-0'}`}>
-                <div className="inline-flex items-center gap-2 bg-amber-400 text-foreground rounded-full pl-1.5 pr-4 py-1.5 shadow-lg">
-                  <span className="w-7 h-7 bg-white rounded-full flex items-center justify-center">
-                    <Award className="w-4 h-4 text-amber-600" />
-                  </span>
-                  <span className="text-sm font-bold">Certifié ISO 9001:2015</span>
-                </div>
-                <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 border border-white/30">
-                  <Stethoscope className="w-4 h-4" />
-                  <span className="text-sm font-medium">{slide.subtitle}</span>
-                </div>
-                <h2 className="text-4xl lg:text-6xl font-bold leading-tight font-heading">
-                  {slide.title}
-                  <br />
-                  <span className="text-white/85">{slide.titleHighlight}</span>
-                </h2>
-                <p className="text-lg text-white/90 leading-relaxed max-w-lg">
-                  {slide.description}
-                </p>
-                <div className="flex flex-wrap gap-4">
-                  <Link to="/rendez-vous">
-                    <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-xl cursor-pointer font-semibold min-h-[48px]">
-                      <Calendar className="w-5 h-5 mr-2" />
-                      Prendre Rendez-vous
-                    </Button>
-                  </Link>
-                  <Link to="/services">
-                    <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white/10 backdrop-blur-sm cursor-pointer min-h-[48px]">
-                      <ArrowRight className="w-5 h-5 mr-2" />
-                      Nos Services
-                    </Button>
-                  </Link>
-                </div>
-                <div className="grid grid-cols-3 gap-4 pt-4">
-                  {slide.stats.map((stat, i) => {
-                    const Icon = stat.icon;
-                    return (
-                      <div key={i} className="text-center">
-                        <div className="inline-flex items-center justify-center w-11 h-11 bg-white/20 backdrop-blur-sm rounded-xl mb-2">
-                          <Icon className="w-5 h-5" />
-                        </div>
-                        <div className="text-2xl font-bold font-heading">{stat.value}</div>
-                        <div className="text-xs text-white/80">{stat.label}</div>
-                      </div>
-                    );
-                  })}
-                </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 lg:pt-24 pb-16 lg:pb-28">
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-20 items-center">
+            {/* Texte */}
+            <div className="space-y-8 animate-fade-in">
+              <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-medical-copper">
+                <span className="h-px w-10 bg-medical-copper/60" aria-hidden="true" />
+                Centre Hospitalier Régional de Maroua
+              </p>
+              <h2 className="text-4xl sm:text-5xl lg:text-[4rem] font-heading font-semibold leading-[1.05] text-foreground">
+                Des soins d'excellence, avec une{' '}
+                <em className="italic text-medical-copper">attention humaine</em>.
+              </h2>
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
+                Établissement de santé de référence en Extrême-Nord du Cameroun. Une équipe dévouée
+                vous accompagne à chaque étape de votre parcours de soins, avec des technologies
+                adaptées pour des diagnostics précis.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link to="/rendez-vous">
+                  <Button size="lg" className="cursor-pointer medical-gradient text-white shadow-xl hover:opacity-90 transition-opacity font-semibold min-h-[52px] rounded-full px-8">
+                    <Calendar className="w-5 h-5 mr-2" />
+                    Prendre Rendez-vous
+                  </Button>
+                </Link>
+                <Link to="/services">
+                  <Button size="lg" variant="outline" className="cursor-pointer rounded-full border-2 border-foreground/20 hover:border-foreground hover:bg-foreground hover:text-white transition-colors min-h-[52px] px-8">
+                    Nos Services
+                    <ArrowRight className="w-5 h-5 ml-1" />
+                  </Button>
+                </Link>
               </div>
 
-              {/* Image */}
-              <div className={`relative transition-all duration-500 ${isAnimating ? 'opacity-0 translate-x-4' : 'opacity-100 translate-x-0'}`}>
-                <div className="relative overflow-hidden rounded-3xl shadow-2xl">
-                  <img
-                    src={slide.image}
-                    alt={slide.title}
-                    loading="lazy"
-                    className="w-full h-[460px] object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-                </div>
-                <div className="absolute -top-4 -left-4 bg-white rounded-2xl p-4 shadow-xl">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center">
-                      <CheckCircle className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <div className="text-xl font-bold text-foreground font-heading">28+</div>
-                      <div className="text-xs text-muted-foreground">Spécialités</div>
-                    </div>
+              {/* Stats — filets éditoriaux */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-6 pt-6 border-t border-border">
+                {[
+                  { value: '28+', label: 'Spécialités' },
+                  { value: '13+', label: 'Médecins' },
+                  { value: '24/7', label: 'Urgences' },
+                  { value: 'ISO 9001', label: 'Certifié' },
+                ].map((s, i) => (
+                  <div key={i} className={i > 0 ? 'sm:border-l sm:border-border sm:pl-6' : ''}>
+                    <div className="text-3xl font-heading font-semibold text-foreground">{s.value}</div>
+                    <div className="text-xs uppercase tracking-wider text-muted-foreground mt-1">{s.label}</div>
                   </div>
-                </div>
-                <div className="absolute -bottom-4 -right-4 bg-white rounded-2xl p-4 shadow-xl">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 medical-gradient rounded-xl flex items-center justify-center">
-                      <Shield className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <div className="text-xl font-bold text-foreground font-heading">24/7</div>
-                      <div className="text-xs text-muted-foreground">Urgences</div>
-                    </div>
-                  </div>
-                </div>
-                {/* Sceau ISO 9001 flottant */}
-                <div className="absolute -top-7 -right-5 lg:-right-8 z-10 drop-shadow-xl">
-                  <IsoSeal size={104} className="animate-float" />
-                </div>
+                ))}
               </div>
             </div>
-          </div>
 
-          {/* Arrows */}
-          <button
-            onClick={handlePrev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full flex items-center justify-center transition-colors border border-white/30 cursor-pointer"
-            aria-label="Diapositive précédente"
-          >
-            <ChevronLeft className="w-5 h-5 text-white" />
-          </button>
-          <button
-            onClick={handleNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full flex items-center justify-center transition-colors border border-white/30 cursor-pointer"
-            aria-label="Diapositive suivante"
-          >
-            <ChevronRight className="w-5 h-5 text-white" />
-          </button>
-
-          {/* Dots */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-2">
-            {carouselSlides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => { setIsAnimating(true); setCurrentSlide(i); setTimeout(() => setIsAnimating(false), 500); }}
-                className={`transition-all duration-300 rounded-full cursor-pointer ${i === currentSlide ? 'w-10 h-3 bg-white' : 'w-3 h-3 bg-white/50 hover:bg-white/70'}`}
-                aria-label={`Aller à la diapositive ${i + 1}`}
-              />
-            ))}
-          </div>
-          <div className="absolute bottom-0 left-0 w-full h-1 bg-white/20">
-            <div className="h-full bg-white transition-all duration-300" style={{ width: `${((currentSlide + 1) / carouselSlides.length) * 100}%` }} />
+            {/* Image en arche */}
+            <div className="relative animate-slide-up">
+              <div className="relative rounded-t-[999px] rounded-b-[2rem] overflow-hidden border-[6px] border-white shadow-2xl aspect-[3/4] max-h-[560px]">
+                <img
+                  src={IMAGES.MEDICAL_TEAM_6}
+                  alt="Équipe médicale du CHR Maroua"
+                  loading="lazy"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/50 via-transparent to-transparent" />
+                {/* Carte urgences */}
+                <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-xl flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-medical-copper rounded-full flex items-center justify-center">
+                      <Phone className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <div className="text-xs uppercase tracking-wider text-muted-foreground">Urgences 24h/24</div>
+                      <div className="text-sm font-bold text-foreground">+237 671 440 486</div>
+                    </div>
+                  </div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-emergency-red animate-pulse" aria-hidden="true" />
+                </div>
+              </div>
+              {/* Sceau ISO 9001 flottant */}
+              <div className="absolute -top-6 -right-4 lg:-right-8 z-10 drop-shadow-xl">
+                <IsoSeal size={110} className="animate-float" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Certification ISO 9001 */}
+      {/* ===== Ticker éditorial ===== */}
+      <div className="bg-foreground text-white border-y-4 border-medical-gold/60 overflow-hidden py-3.5" aria-hidden="true">
+        <div className="flex whitespace-nowrap w-max animate-marquee">
+          {[0, 1].map(copy => (
+            <div key={copy} className="flex items-center">
+              {TICKER_ITEMS.map((item, i) => (
+                <span key={i} className="flex items-center text-sm font-semibold uppercase tracking-[0.2em]">
+                  <span className="px-6">{item}</span>
+                  <span className="text-medical-gold">✦</span>
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ===== Certification ISO 9001 ===== */}
       <section className="relative overflow-hidden bg-foreground text-white py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-        {/* Halos décoratifs */}
-        <div className="absolute -top-40 -left-40 w-[28rem] h-[28rem] rounded-full bg-teal-500/25 blur-3xl" aria-hidden="true" />
+        <div className="absolute -top-40 -left-40 w-[28rem] h-[28rem] rounded-full bg-medical-copper/20 blur-3xl" aria-hidden="true" />
         <div className="absolute -bottom-40 -right-40 w-[28rem] h-[28rem] rounded-full bg-amber-500/15 blur-3xl" aria-hidden="true" />
         <div className="absolute inset-0 opacity-[0.05]" aria-hidden="true" style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
@@ -394,7 +312,7 @@ const Index = () => {
                 <Award className="w-4 h-4 text-amber-400" />
                 <span className="text-sm font-semibold text-amber-300">Certification Internationale</span>
               </div>
-              <h2 className="text-3xl lg:text-5xl font-bold font-heading leading-tight">
+              <h2 className="text-3xl lg:text-5xl font-heading leading-tight">
                 Le CHR Maroua est officiellement{' '}
                 <span className="text-amber-400">certifié ISO 9001:2015</span>
               </h2>
@@ -405,23 +323,7 @@ const Index = () => {
                 satisfaction de chaque patient.
               </p>
               <div className="grid sm:grid-cols-3 gap-4">
-                {[
-                  {
-                    icon: ShieldCheck,
-                    title: 'Management de la Qualité',
-                    description: 'Processus maîtrisés, documentés et tracés sur l\'ensemble de nos activités.',
-                  },
-                  {
-                    icon: ClipboardCheck,
-                    title: 'Exigences Auditées',
-                    description: 'Conformité vérifiée par un organisme certificateur externe indépendant.',
-                  },
-                  {
-                    icon: TrendingUp,
-                    title: 'Amélioration Continue',
-                    description: 'Un engagement permanent pour des soins toujours plus sûrs et efficaces.',
-                  },
-                ].map((p, i) => {
+                {isoPillars.map((p, i) => {
                   const Icon = p.icon;
                   return (
                     <div
@@ -431,7 +333,7 @@ const Index = () => {
                       <div className="w-11 h-11 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl flex items-center justify-center mb-3 shadow-md">
                         <Icon className="w-5 h-5 text-white" />
                       </div>
-                      <h3 className="text-sm font-bold font-heading mb-1">{p.title}</h3>
+                      <h3 className="text-sm font-heading font-semibold mb-1">{p.title}</h3>
                       <p className="text-xs text-white/65 leading-relaxed">{p.description}</p>
                     </div>
                   );
@@ -439,13 +341,13 @@ const Index = () => {
               </div>
               <div className="flex flex-wrap gap-4 pt-2">
                 <Link to="/informations">
-                  <Button size="lg" className="bg-amber-400 text-foreground hover:bg-amber-300 shadow-lg cursor-pointer font-semibold min-h-[48px]">
+                  <Button size="lg" className="bg-amber-400 text-foreground hover:bg-amber-300 shadow-lg cursor-pointer font-semibold min-h-[48px] rounded-full px-8">
                     Découvrir notre démarche qualité
                     <ArrowRight className="w-5 h-5 ml-1" />
                   </Button>
                 </Link>
                 <Link to="/services">
-                  <Button size="lg" variant="outline" className="border-2 border-white/40 text-white hover:bg-white/10 backdrop-blur-sm cursor-pointer min-h-[48px]">
+                  <Button size="lg" variant="outline" className="border-2 border-white/40 text-white hover:bg-white/10 backdrop-blur-sm cursor-pointer min-h-[48px] rounded-full px-8">
                     Nos Services
                   </Button>
                 </Link>
@@ -455,45 +357,54 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Services */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      {/* ===== Services — liste numérotée ===== */}
+      <section className="py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <Badge className="mb-4 bg-secondary text-primary hover:bg-secondary">Nos Services</Badge>
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4 font-heading">
-              28 Spécialités Médicales
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Du diagnostic au traitement, nous couvrons l'ensemble des besoins de santé de la population de l'Extrême-Nord.
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+            <div>
+              <Badge className="mb-4 bg-secondary text-medical-copper hover:bg-secondary uppercase tracking-[0.2em]">Nos Services</Badge>
+              <h2 className="text-3xl lg:text-5xl font-heading font-semibold text-foreground leading-tight">
+                28 spécialités au service<br />de votre santé
+              </h2>
+            </div>
+            <p className="text-muted-foreground max-w-sm lg:text-right leading-relaxed">
+              Du diagnostic au traitement, nous couvrons l'ensemble des besoins de santé de la
+              population de l'Extrême-Nord.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <div className="border-t border-border">
             {services.map((service, i) => {
               const Icon = service.icon;
               return (
-                <Card key={i} className="group hover:shadow-xl transition-all duration-300 border-border overflow-hidden cursor-pointer hover-lift">
-                  <CardContent className="p-7">
-                    <div className={`w-14 h-14 bg-gradient-to-br ${service.color} rounded-xl flex items-center justify-center mb-5 group-hover:scale-105 transition-transform duration-200 shadow-md`}>
-                      <Icon className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors font-heading">
+                <div
+                  key={i}
+                  className="group grid md:grid-cols-[80px_64px_1fr_auto] items-center gap-4 md:gap-6 border-b border-border py-6 md:py-7 px-2 md:px-4 hover:bg-card transition-colors duration-200"
+                >
+                  <span className="text-3xl font-heading font-semibold text-medical-copper/60 group-hover:text-medical-copper transition-colors">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div className="w-12 h-12 rounded-full bg-medical-copper/10 text-medical-copper flex items-center justify-center group-hover:bg-medical-copper group-hover:text-white transition-colors duration-200">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-heading font-semibold text-foreground mb-1 group-hover:text-medical-copper transition-colors">
                       {service.title}
                     </h3>
-                    <p className="text-muted-foreground leading-relaxed text-sm mb-4">
-                      {service.description}
-                    </p>
-                    <Link to="/services" className="inline-flex items-center text-primary font-medium text-sm hover:gap-2 transition-all cursor-pointer">
-                      En savoir plus
-                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </CardContent>
-                </Card>
+                    <p className="text-sm text-muted-foreground leading-relaxed max-w-xl">{service.description}</p>
+                  </div>
+                  <Link to="/services" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-foreground opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-all cursor-pointer">
+                    En savoir plus
+                    <ArrowRight className="w-4 h-4 text-medical-copper" />
+                  </Link>
+                </div>
               );
             })}
           </div>
-          <div className="text-center mt-10">
+
+          <div className="text-center mt-12">
             <Link to="/services">
-              <Button size="lg" className="cursor-pointer medical-gradient text-white shadow-md hover:opacity-90 transition-opacity">
+              <Button size="lg" className="cursor-pointer medical-gradient text-white shadow-md hover:opacity-90 transition-opacity rounded-full px-10 min-h-[52px]">
                 Voir les 28 Spécialités
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
@@ -502,27 +413,27 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Valeurs */}
-      <section className="py-20 bg-secondary/40 px-4 sm:px-6 lg:px-8">
+      {/* ===== Valeurs ===== */}
+      <section className="py-20 lg:py-28 bg-medical-sand px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
-            <Badge className="mb-4 bg-secondary text-primary hover:bg-secondary">Notre Engagement</Badge>
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4 font-heading">
-              Sécurité · Qualité · Humanisation
+            <Badge className="mb-4 bg-white text-medical-copper hover:bg-white uppercase tracking-[0.2em]">Notre Engagement</Badge>
+            <h2 className="text-3xl lg:text-5xl font-heading font-semibold text-foreground leading-tight">
+              Sécurité · Qualité · <em className="italic text-medical-copper">Humanisation</em>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mt-4 leading-relaxed">
               Les trois piliers qui guident chaque action de l'équipe du CHR Maroua au quotidien.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((f, i) => {
               const Icon = f.icon;
               return (
                 <div key={i} className="text-center group">
-                  <div className="inline-flex items-center justify-center w-18 h-18 w-[72px] h-[72px] medical-gradient rounded-2xl mb-5 group-hover:scale-105 transition-transform duration-200 shadow-lg">
-                    <Icon className="w-9 h-9 text-white" />
+                  <div className="inline-flex items-center justify-center w-[72px] h-[72px] rounded-full border border-medical-copper/30 bg-white text-medical-copper mb-5 group-hover:bg-medical-copper group-hover:text-white group-hover:scale-105 transition-all duration-200 shadow-md">
+                    <Icon className="w-8 h-8" />
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-2 font-heading">{f.title}</h3>
+                  <h3 className="text-lg font-heading font-semibold text-foreground mb-2">{f.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">{f.description}</p>
                 </div>
               );
@@ -531,19 +442,22 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-20 medical-gradient text-white px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {/* ===== Stats ===== */}
+      <section className="py-20 lg:py-24 medical-gradient text-white px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.06]" aria-hidden="true" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }} />
+        <div className="relative max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
             {stats.map((s, i) => {
               const Icon = s.icon;
               return (
                 <div key={i} className="text-center group">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl mb-4 group-hover:scale-105 transition-transform">
-                    <Icon className="w-8 h-8" />
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white/15 backdrop-blur-sm border border-white/25 mb-4 group-hover:scale-105 transition-transform">
+                    <Icon className="w-6 h-6" />
                   </div>
-                  <div className="text-4xl font-bold mb-2 font-heading">{s.value}</div>
-                  <div className="text-white/85 text-sm">{s.label}</div>
+                  <div className="text-4xl font-heading font-semibold mb-1">{s.value}</div>
+                  <div className="text-white/80 text-sm">{s.label}</div>
                 </div>
               );
             })}
@@ -551,69 +465,69 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      {/* ===== CTA ===== */}
+      <section className="py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <Card className="border-border shadow-xl overflow-hidden bg-foreground text-white">
-            <CardContent className="p-10 text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 medical-gradient rounded-2xl mb-6">
-                <Calendar className="w-8 h-8 text-white" />
-              </div>
-              <h2 className="text-3xl font-bold mb-3 font-heading">
-                Prêt à Consulter ?
-              </h2>
-              <p className="text-white/80 mb-8 max-w-xl mx-auto text-base leading-relaxed">
-                Prenez rendez-vous en ligne avec l'un de nos 13 médecins spécialistes. Nous vous contacterons rapidement pour confirmer.
-              </p>
-              <div className="flex flex-wrap gap-4 justify-center">
-                <Link to="/rendez-vous">
-                  <Button size="lg" className="bg-medical-green text-white hover:opacity-90 transition-opacity shadow-lg cursor-pointer font-semibold min-h-[48px]">
-                    <Calendar className="w-5 h-5 mr-2" />
-                    Prendre Rendez-vous
-                  </Button>
-                </Link>
-                <Link to="/contact">
-                  <Button size="lg" variant="outline" className="border-2 border-white/50 text-white hover:bg-white/10 transition-colors cursor-pointer min-h-[48px]">
-                    <Phone className="w-5 h-5 mr-2" />
-                    Nous Contacter
-                  </Button>
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="relative bg-card border border-border rounded-[2rem] shadow-xl overflow-hidden px-8 py-14 lg:p-16 text-center">
+            <div className="absolute top-0 left-0 right-0 h-1.5 medical-gradient" aria-hidden="true" />
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full medical-gradient text-white mb-6 shadow-lg">
+              <Calendar className="w-7 h-7" />
+            </div>
+            <h2 className="text-3xl lg:text-4xl font-heading font-semibold text-foreground mb-3">
+              Prêt à consulter ?
+            </h2>
+            <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-base leading-relaxed">
+              Prenez rendez-vous en ligne avec l'un de nos 13 médecins spécialistes. Nous vous
+              contacterons rapidement pour confirmer.
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Link to="/rendez-vous">
+                <Button size="lg" className="cursor-pointer medical-gradient text-white hover:opacity-90 transition-opacity shadow-lg font-semibold min-h-[52px] rounded-full px-10">
+                  <Calendar className="w-5 h-5 mr-2" />
+                  Prendre Rendez-vous
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button size="lg" variant="outline" className="cursor-pointer rounded-full border-2 border-foreground/20 hover:border-foreground hover:bg-foreground hover:text-white transition-colors min-h-[52px] px-10">
+                  <Phone className="w-5 h-5 mr-2" />
+                  Nous Contacter
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Footer */}
+      {/* ===== Footer ===== */}
       <footer className="bg-foreground text-white py-14 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
             {/* Brand */}
             <div className="space-y-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-11 h-11 medical-gradient rounded-xl flex items-center justify-center">
-                  <Stethoscope className="w-6 h-6 text-white" />
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-full medical-gradient flex items-center justify-center">
+                  <Stethoscope className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold font-heading">CHR Maroua</h3>
+                  <h3 className="text-lg font-heading font-semibold">CHR Maroua</h3>
                   <p className="text-xs text-white/60">Centre Hospitalier Régional</p>
                 </div>
               </div>
               <p className="text-white/65 text-sm leading-relaxed">
-                Établissement de santé de référence en Extrême-Nord du Cameroun. Opérationnel depuis 2024, certifié ISO 9001:2015.
+                Établissement de santé de référence en Extrême-Nord du Cameroun. Opérationnel depuis 2024,
+                certifié ISO 9001:2015.
               </p>
-              {/* Réseaux sociaux */}
               <div className="flex items-center gap-3 pt-1">
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook CHR Maroua" className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-colors cursor-pointer">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook CHR Maroua" className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors cursor-pointer">
                   <Facebook className="w-4 h-4" />
                 </a>
-                <a href="https://wa.me/237689867206" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp CHR Maroua" className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-colors cursor-pointer">
+                <a href="https://wa.me/237689867206" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp CHR Maroua" className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors cursor-pointer">
                   <MessageCircle className="w-4 h-4" />
                 </a>
-                <a href="https://tiktok.com/@chr_maroua" target="_blank" rel="noopener noreferrer" aria-label="TikTok @chr_maroua" className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-colors cursor-pointer">
+                <a href="https://tiktok.com/@chr_maroua" target="_blank" rel="noopener noreferrer" aria-label="TikTok @chr_maroua" className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors cursor-pointer">
                   <span className="text-xs font-bold">TK</span>
                 </a>
-                <a href="https://youtube.com/@chr_maroua" target="_blank" rel="noopener noreferrer" aria-label="YouTube @chr_maroua" className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-colors cursor-pointer">
+                <a href="https://youtube.com/@chr_maroua" target="_blank" rel="noopener noreferrer" aria-label="YouTube @chr_maroua" className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors cursor-pointer">
                   <Youtube className="w-4 h-4" />
                 </a>
               </div>
@@ -621,7 +535,7 @@ const Index = () => {
 
             {/* Liens */}
             <div>
-              <h4 className="font-semibold text-sm mb-4 font-heading uppercase tracking-wide text-white/80">Navigation</h4>
+              <h4 className="font-heading font-semibold text-sm mb-4 uppercase tracking-[0.2em] text-white/80">Navigation</h4>
               <ul className="space-y-2.5">
                 {[
                   { to: '/services', label: 'Nos Services' },
@@ -642,7 +556,7 @@ const Index = () => {
 
             {/* Services */}
             <div>
-              <h4 className="font-semibold text-sm mb-4 font-heading uppercase tracking-wide text-white/80">Services Clés</h4>
+              <h4 className="font-heading font-semibold text-sm mb-4 uppercase tracking-[0.2em] text-white/80">Services Clés</h4>
               <ul className="space-y-2.5 text-sm text-white/65">
                 {['Urgences 24h/24', 'Cardiologie', 'Gynécologie-Obstétrique', 'Pédiatrie', 'Orthopédie-Traumatologie', 'Imagerie Médicale'].map(s => (
                   <li key={s}>
@@ -654,7 +568,7 @@ const Index = () => {
 
             {/* Contact */}
             <div>
-              <h4 className="font-semibold text-sm mb-4 font-heading uppercase tracking-wide text-white/80">Contact</h4>
+              <h4 className="font-heading font-semibold text-sm mb-4 uppercase tracking-[0.2em] text-white/80">Contact</h4>
               <ul className="space-y-3 text-sm text-white/65">
                 <li className="flex items-start gap-3">
                   <Phone className="w-4 h-4 mt-0.5 flex-shrink-0 text-medical-cyan" />
@@ -682,7 +596,7 @@ const Index = () => {
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-xs text-white/40">
               <span className="flex items-center gap-1.5">
-                <Clock className="w-3 h-3" />
+                <Clock3 className="w-3 h-3" />
                 Urgences 24h/24 — +237 671 440 486
               </span>
               <span className="hidden sm:block w-px h-3 bg-white/15" aria-hidden="true" />
