@@ -4,20 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import {
-  Calendar, Phone, Mail, Menu, X, Stethoscope, ArrowRight,
-  Tag, Facebook, Youtube, MessageCircle, Newspaper, Clock
+  Calendar, Phone, ArrowRight, Tag, Facebook, Youtube, MessageCircle,
+  Newspaper, Clock
 } from 'lucide-react';
 import { IMAGES } from '@/assets/images';
-
-const NAV_LINKS = [
-  { to: '/', label: 'Accueil' },
-  { to: '/services', label: 'Services' },
-  { to: '/equipe', label: 'Équipe' },
-  { to: '/actualites', label: 'Actualités' },
-  { to: '/galerie', label: 'Galerie' },
-  { to: '/contact', label: 'Contact' },
-  { to: '/informations', label: 'Informations' },
-];
+import SiteHeader from '@/components/SiteHeader';
+import SiteFooter from '@/components/SiteFooter';
+import PageHero from '@/components/PageHero';
 
 const articles = [
   {
@@ -47,7 +40,6 @@ const articles = [
 const categories = ['Tous', 'Santé Publique', 'Cardiologie'];
 
 const Actualites = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState('Tous');
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
@@ -57,67 +49,21 @@ const Actualites = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Nav */}
-      <nav className="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-50 border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-3">
-            <Link to="/" className="flex items-center space-x-3 cursor-pointer">
-              <div className="w-10 h-10 medical-gradient rounded-xl flex items-center justify-center shadow-sm">
-                <Stethoscope className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <span className="font-bold text-foreground text-sm font-heading block leading-tight">CHR Maroua</span>
-                <span className="text-xs text-muted-foreground">Sécurité · Qualité · Humanisation</span>
-              </div>
-            </Link>
-            <div className="hidden lg:flex items-center space-x-1">
-              {NAV_LINKS.map(l => (
-                <Link key={l.to} to={l.to} className="px-3 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-secondary rounded-lg transition-colors duration-200 cursor-pointer font-medium">{l.label}</Link>
-              ))}
-            </div>
-            <div className="hidden lg:flex items-center gap-3">
-              <a href="tel:+237671440486" className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-emergency-red border border-emergency-red/30 rounded-lg hover:bg-emergency-red/5 transition-colors cursor-pointer min-h-[40px]">
-                <Phone className="w-4 h-4" /> Urgences
-              </a>
-              <Link to="/rendez-vous">
-                <Button className="cursor-pointer medical-gradient text-white shadow-sm hover:opacity-90 min-h-[40px]">
-                  <Calendar className="w-4 h-4 mr-2" /> Rendez-vous
-                </Button>
-              </Link>
-            </div>
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="lg:hidden p-2 rounded-lg hover:bg-secondary cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center" aria-label="Menu">
-              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
-          {isMenuOpen && (
-            <div className="lg:hidden border-t border-border py-3 space-y-1">
-              {NAV_LINKS.map(l => (
-                <Link key={l.to} to={l.to} className="block px-3 py-2.5 text-sm text-muted-foreground hover:text-primary hover:bg-secondary rounded-lg transition-colors cursor-pointer" onClick={() => setIsMenuOpen(false)}>{l.label}</Link>
-              ))}
-              <div className="pt-3 border-t border-border space-y-2 mt-2">
-                <a href="tel:+237671440486" className="flex items-center gap-2 px-3 py-2.5 text-sm text-emergency-red font-medium cursor-pointer min-h-[44px]"><Phone className="w-4 h-4" /> +237 671 440 486</a>
-                <Link to="/rendez-vous" onClick={() => setIsMenuOpen(false)}><Button className="w-full medical-gradient text-white min-h-[44px] cursor-pointer"><Calendar className="w-4 h-4 mr-2" />Rendez-vous</Button></Link>
-              </div>
-            </div>
-          )}
-        </div>
-      </nav>
+      <SiteHeader active="/actualites" />
 
-      {/* Hero */}
-      <section className="medical-gradient text-white py-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <Badge className="mb-4 bg-white/20 text-white border-white/30 hover:bg-white/30">
-            <Newspaper className="w-3 h-3 mr-1" /> Actualités
-          </Badge>
-          <h1 className="text-3xl md:text-5xl font-bold mb-4 font-heading">Actualités & Informations</h1>
-          <p className="text-lg text-white/90 max-w-2xl mx-auto">
-            Restez informé des dernières nouvelles, campagnes de santé et services du Centre Hospitalier Régional de Maroua.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Actualités"
+        title="Actualités & Informations"
+        description="Restez informé des dernières nouvelles, campagnes de santé et services du Centre Hospitalier Régional de Maroua."
+        number="2"
+        meta={[
+          { icon: Newspaper, label: '2 publications' },
+          { icon: Phone, label: 'Urgences 24h/24' },
+        ]}
+      />
 
-      {/* Filtres */}
-      <section className="py-6 px-4 border-b border-border bg-white">
+      {/* ── Filtres ── */}
+      <section className="py-6 px-4 border-b border-border bg-background">
         <div className="max-w-4xl mx-auto flex flex-wrap gap-2 justify-center">
           {categories.map(cat => (
             <button
@@ -125,8 +71,8 @@ const Actualites = () => {
               onClick={() => setActiveCategory(cat)}
               className={`px-5 py-2 rounded-full text-sm font-medium transition-colors duration-200 cursor-pointer min-h-[40px] ${
                 activeCategory === cat
-                  ? 'medical-gradient text-white shadow-sm'
-                  : 'bg-secondary text-muted-foreground hover:text-primary border border-border'
+                  ? 'bg-foreground text-white shadow-sm'
+                  : 'bg-secondary text-muted-foreground hover:text-foreground border border-border'
               }`}
             >
               {cat}
@@ -135,7 +81,7 @@ const Actualites = () => {
         </div>
       </section>
 
-      {/* Articles */}
+      {/* ── Articles ── */}
       <section className="py-14 px-4">
         <div className="max-w-4xl mx-auto space-y-8">
           {filtered.length === 0 && (
@@ -144,16 +90,19 @@ const Actualites = () => {
           {filtered.map(article => (
             <Card key={article.id} className="overflow-hidden border-border shadow-sm hover:shadow-lg transition-shadow duration-300">
               <div className="md:flex">
-                <div className="md:w-64 flex-shrink-0">
+                <div className="md:w-72 flex-shrink-0 relative">
                   <img src={article.image} alt={article.titre} loading="lazy" className="w-full h-52 md:h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-foreground/40 to-transparent" />
                 </div>
                 <CardContent className="flex-1 p-6">
-                  <div className="flex flex-wrap items-center gap-2 mb-3">
-                    <Badge className="bg-secondary text-primary hover:bg-secondary text-xs border-0">{article.categorie}</Badge>
+                  <div className="flex flex-wrap items-center gap-3 mb-3">
+                    <Badge className="bg-medical-copper/10 text-medical-copper hover:bg-medical-copper/10 border-0 text-xs">
+                      {article.categorie}
+                    </Badge>
                     <span className="flex items-center gap-1 text-xs text-muted-foreground"><Calendar className="w-3 h-3" /> {article.date}</span>
                     <span className="flex items-center gap-1 text-xs text-muted-foreground"><Clock className="w-3 h-3" /> {article.auteur}</span>
                   </div>
-                  <h2 className="text-xl font-bold text-foreground mb-3 font-heading leading-snug">{article.titre}</h2>
+                  <h2 className="text-xl font-heading font-semibold text-foreground mb-3 leading-snug">{article.titre}</h2>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-4">
                     {expandedId === article.id ? article.contenu : article.extrait}
                   </p>
@@ -168,7 +117,7 @@ const Actualites = () => {
                     variant={expandedId === article.id ? 'outline' : 'default'}
                     size="sm"
                     onClick={() => setExpandedId(expandedId === article.id ? null : article.id)}
-                    className="cursor-pointer min-h-[40px]"
+                    className="cursor-pointer min-h-[40px] rounded-full px-6"
                   >
                     {expandedId === article.id ? 'Réduire' : 'Lire la suite'}
                     <ArrowRight className="w-3 h-3 ml-1" />
@@ -180,56 +129,26 @@ const Actualites = () => {
         </div>
       </section>
 
-      {/* Réseaux sociaux */}
-      <section className="py-12 px-4 bg-secondary/40">
+      {/* ── Réseaux sociaux ── */}
+      <section className="py-12 px-4 bg-medical-sand">
         <div className="max-w-2xl mx-auto text-center">
-          <h3 className="text-lg font-bold text-foreground mb-2 font-heading">Suivez-nous pour plus d'actualités</h3>
+          <h3 className="text-lg font-heading font-semibold text-foreground mb-2">Suivez-nous pour plus d'actualités</h3>
           <p className="text-sm text-muted-foreground mb-6">D'autres actualités seront publiées prochainement. Suivez-nous sur nos réseaux sociaux.</p>
           <div className="flex justify-center flex-wrap gap-3">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors cursor-pointer min-h-[44px]">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 text-white text-sm rounded-full hover:bg-blue-700 transition-colors cursor-pointer min-h-[44px]">
               <Facebook className="w-4 h-4" /> Facebook
             </a>
-            <a href="https://wa.me/237689867206" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 bg-emerald-600 text-white text-sm rounded-lg hover:bg-emerald-700 transition-colors cursor-pointer min-h-[44px]">
+            <a href="https://wa.me/237689867206" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 bg-emerald-600 text-white text-sm rounded-full hover:bg-emerald-700 transition-colors cursor-pointer min-h-[44px]">
               <MessageCircle className="w-4 h-4" /> WhatsApp
             </a>
-            <a href="https://youtube.com/@chr_maroua" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition-colors cursor-pointer min-h-[44px]">
+            <a href="https://youtube.com/@chr_maroua" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 bg-red-600 text-white text-sm rounded-full hover:bg-red-700 transition-colors cursor-pointer min-h-[44px]">
               <Youtube className="w-4 h-4" /> YouTube
             </a>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-foreground text-white py-10 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-9 h-9 medical-gradient rounded-lg flex items-center justify-center"><Stethoscope className="w-5 h-5 text-white" /></div>
-                <div><p className="font-bold text-sm font-heading">CHR Maroua</p><p className="text-xs text-white/60">Centre Hospitalier Régional</p></div>
-              </div>
-              <p className="text-white/60 text-sm">Sékandé, Maroua — Extrême-Nord, Cameroun.</p>
-            </div>
-            <div>
-              <h4 className="font-semibold text-sm mb-4 font-heading uppercase tracking-wide text-white/70">Contact</h4>
-              <div className="space-y-2 text-sm text-white/65">
-                <a href="tel:+237689867206" className="flex items-center gap-2 hover:text-white cursor-pointer transition-colors"><Phone className="w-4 h-4" />+237 689 867 206</a>
-                <a href="tel:+237671440486" className="flex items-center gap-2 hover:text-white cursor-pointer transition-colors text-emergency-red/80"><Phone className="w-4 h-4" />+237 671 440 486 (Urgences)</a>
-                <a href="mailto:contact@chr-maroua.cm" className="flex items-center gap-2 hover:text-white cursor-pointer transition-colors"><Mail className="w-4 h-4" />contact@chr-maroua.cm</a>
-              </div>
-            </div>
-            <div>
-              <h4 className="font-semibold text-sm mb-4 font-heading uppercase tracking-wide text-white/70">Navigation</h4>
-              <div className="grid grid-cols-2 gap-2 text-sm text-white/65">
-                {NAV_LINKS.map(l => <Link key={l.to} to={l.to} className="hover:text-white transition-colors cursor-pointer">{l.label}</Link>)}
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-white/10 pt-6 text-center text-xs text-white/40">
-            © {new Date().getFullYear()} Centre Hospitalier Régional de Maroua. Tous droits réservés.
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 };

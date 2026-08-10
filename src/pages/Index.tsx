@@ -1,25 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
-  Stethoscope, Calendar, Phone, MapPin, Mail, Users, Award, Heart, Shield,
-  Activity, Ambulance, UserCheck, Menu, X, ArrowRight, Clock3, Microscope,
-  Baby, Facebook, Youtube, MessageCircle, ShieldCheck, ClipboardCheck,
-  TrendingUp, Sparkles
+  Stethoscope, Calendar, Phone, Users, Award, Heart, Shield,
+  Activity, Ambulance, UserCheck, ArrowRight, Clock3, Microscope,
+  Baby, ShieldCheck, ClipboardCheck, TrendingUp
 } from 'lucide-react';
 import { IMAGES } from '@/assets/images';
 import IsoSeal from '@/components/IsoSeal';
-
-const NAV_LINKS = [
-  { to: '/', label: 'Accueil' },
-  { to: '/services', label: 'Services' },
-  { to: '/equipe', label: 'Équipe' },
-  { to: '/actualites', label: 'Actualités' },
-  { to: '/galerie', label: 'Galerie' },
-  { to: '/contact', label: 'Contact' },
-  { to: '/informations', label: 'Informations' },
-];
+import SiteHeader from '@/components/SiteHeader';
+import SiteFooter from '@/components/SiteFooter';
 
 const TICKER_ITEMS = [
   'Sécurité',
@@ -32,8 +23,6 @@ const TICKER_ITEMS = [
 ];
 
 const Index = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const services = [
     { icon: Ambulance, title: 'Urgences 24h/24', description: 'Prise en charge immédiate pour toute urgence médicale, disponible en permanence.' },
     { icon: Heart, title: 'Cardiologie', description: 'Prévention, diagnostic et traitement de toutes les maladies du cœur et des vaisseaux.' },
@@ -77,105 +66,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* ===== Header ===== */}
-      <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
-        {/* Ruban certification ISO 9001 — toujours visible */}
-        <div className="bg-foreground text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex items-center justify-center lg:justify-between gap-3">
-            <div className="flex items-center gap-2 text-xs font-medium">
-              <ShieldCheck className="w-4 h-4 text-amber-400 flex-shrink-0" />
-              <span className="font-bold">Certifié ISO 9001:2015</span>
-              <span className="hidden sm:inline text-white/60">· Système de Management de la Qualité</span>
-            </div>
-            <div className="hidden lg:flex items-center gap-1.5 text-xs text-amber-300">
-              <Sparkles className="w-4 h-4" />
-              <span>Agrément obtenu — Qualité certifiée</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 cursor-pointer group">
-              <div className="w-11 h-11 medical-gradient rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
-                <Stethoscope className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <h1 className="text-lg font-heading font-semibold text-foreground leading-tight">CHR Maroua</h1>
-                <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">Sécurité · Qualité · Humanisation</p>
-              </div>
-            </Link>
-
-            {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-1">
-              {NAV_LINKS.map(link => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className="px-3 py-2 rounded-full text-[13px] uppercase tracking-wider text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors duration-200 cursor-pointer font-medium"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-
-            {/* CTA */}
-            <div className="hidden lg:flex items-center gap-3">
-              <a
-                href="tel:+237671440486"
-                className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-medical-copper border border-medical-copper/40 rounded-full hover:bg-medical-copper/5 transition-colors duration-200 cursor-pointer min-h-[40px]"
-              >
-                <Phone className="w-4 h-4" />
-                Urgences
-              </a>
-              <Link to="/rendez-vous">
-                <Button className="cursor-pointer medical-gradient text-white shadow-md hover:shadow-lg hover:opacity-90 transition-all min-h-[40px] rounded-full px-6">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  Rendez-vous
-                </Button>
-              </Link>
-            </div>
-
-            {/* Mobile menu */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 rounded-full hover:bg-secondary transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
-              aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-            >
-              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
-
-          {/* Mobile Nav */}
-          {isMenuOpen && (
-            <div className="lg:hidden py-3 border-t border-border">
-              <nav className="flex flex-col gap-1">
-                {NAV_LINKS.map(link => (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    className="px-4 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors cursor-pointer uppercase tracking-wider"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                <div className="flex flex-col gap-2 pt-3 border-t border-border mt-2">
-                  <a href="tel:+237671440486" className="flex items-center gap-2 px-4 py-2.5 text-sm text-medical-copper font-semibold cursor-pointer min-h-[44px]">
-                    <Phone className="w-4 h-4" /> +237 671 440 486 (Urgences)
-                  </a>
-                  <Link to="/rendez-vous" onClick={() => setIsMenuOpen(false)}>
-                    <Button className="w-full cursor-pointer medical-gradient text-white min-h-[44px] rounded-full">
-                      <Calendar className="w-4 h-4 mr-2" /> Prendre Rendez-vous
-                    </Button>
-                  </Link>
-                </div>
-              </nav>
-            </div>
-          )}
-        </div>
-      </header>
+      <SiteHeader />
 
       {/* ===== Hero éditorial ===== */}
       <section className="relative overflow-hidden">
@@ -199,10 +90,10 @@ const Index = () => {
                 <span className="h-px w-10 bg-medical-copper/60" aria-hidden="true" />
                 Centre Hospitalier Régional de Maroua
               </p>
-              <h2 className="text-4xl sm:text-5xl lg:text-[4rem] font-heading font-semibold leading-[1.05] text-foreground">
+              <h1 className="text-4xl sm:text-5xl lg:text-[4rem] font-heading font-semibold leading-[1.05] text-foreground">
                 Des soins d'excellence, avec une{' '}
                 <em className="italic text-medical-copper">attention humaine</em>.
-              </h2>
+              </h1>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
                 Établissement de santé de référence en Extrême-Nord du Cameroun. Une équipe dévouée
                 vous accompagne à chaque étape de votre parcours de soins, avec des technologies
@@ -498,116 +389,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ===== Footer ===== */}
-      <footer className="bg-foreground text-white py-14 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
-            {/* Brand */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-full medical-gradient flex items-center justify-center">
-                  <Stethoscope className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-heading font-semibold">CHR Maroua</h3>
-                  <p className="text-xs text-white/60">Centre Hospitalier Régional</p>
-                </div>
-              </div>
-              <p className="text-white/65 text-sm leading-relaxed">
-                Établissement de santé de référence en Extrême-Nord du Cameroun. Opérationnel depuis 2024,
-                certifié ISO 9001:2015.
-              </p>
-              <div className="flex items-center gap-3 pt-1">
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook CHR Maroua" className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors cursor-pointer">
-                  <Facebook className="w-4 h-4" />
-                </a>
-                <a href="https://wa.me/237689867206" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp CHR Maroua" className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors cursor-pointer">
-                  <MessageCircle className="w-4 h-4" />
-                </a>
-                <a href="https://tiktok.com/@chr_maroua" target="_blank" rel="noopener noreferrer" aria-label="TikTok @chr_maroua" className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors cursor-pointer">
-                  <span className="text-xs font-bold">TK</span>
-                </a>
-                <a href="https://youtube.com/@chr_maroua" target="_blank" rel="noopener noreferrer" aria-label="YouTube @chr_maroua" className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors cursor-pointer">
-                  <Youtube className="w-4 h-4" />
-                </a>
-              </div>
-            </div>
-
-            {/* Liens */}
-            <div>
-              <h4 className="font-heading font-semibold text-sm mb-4 uppercase tracking-[0.2em] text-white/80">Navigation</h4>
-              <ul className="space-y-2.5">
-                {[
-                  { to: '/services', label: 'Nos Services' },
-                  { to: '/equipe', label: 'Notre Équipe' },
-                  { to: '/actualites', label: 'Actualités' },
-                  { to: '/galerie', label: 'Galerie' },
-                  { to: '/informations', label: 'Informations Pratiques' },
-                ].map(link => (
-                  <li key={link.to}>
-                    <Link to={link.to} className="text-white/65 hover:text-white transition-colors text-sm flex items-center group cursor-pointer">
-                      <ArrowRight className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Services */}
-            <div>
-              <h4 className="font-heading font-semibold text-sm mb-4 uppercase tracking-[0.2em] text-white/80">Services Clés</h4>
-              <ul className="space-y-2.5 text-sm text-white/65">
-                {['Urgences 24h/24', 'Cardiologie', 'Gynécologie-Obstétrique', 'Pédiatrie', 'Orthopédie-Traumatologie', 'Imagerie Médicale'].map(s => (
-                  <li key={s}>
-                    <Link to="/services" className="hover:text-white transition-colors cursor-pointer">{s}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Contact */}
-            <div>
-              <h4 className="font-heading font-semibold text-sm mb-4 uppercase tracking-[0.2em] text-white/80">Contact</h4>
-              <ul className="space-y-3 text-sm text-white/65">
-                <li className="flex items-start gap-3">
-                  <Phone className="w-4 h-4 mt-0.5 flex-shrink-0 text-medical-cyan" />
-                  <a href="tel:+237689867206" className="hover:text-white transition-colors cursor-pointer">+237 689 867 206</a>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Phone className="w-4 h-4 mt-0.5 flex-shrink-0 text-emergency-red" />
-                  <a href="tel:+237671440486" className="hover:text-white transition-colors cursor-pointer">+237 671 440 486 <span className="text-xs">(Urgences)</span></a>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Mail className="w-4 h-4 mt-0.5 flex-shrink-0 text-medical-cyan" />
-                  <a href="mailto:contact@chr-maroua.cm" className="hover:text-white transition-colors cursor-pointer">contact@chr-maroua.cm</a>
-                </li>
-                <li className="flex items-start gap-3">
-                  <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-medical-cyan" />
-                  <span>Sékandé, Maroua<br />Extrême-Nord, Cameroun</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-white/50 text-sm">
-              &copy; {new Date().getFullYear()} Centre Hospitalier Régional de Maroua. Tous droits réservés.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-xs text-white/40">
-              <span className="flex items-center gap-1.5">
-                <Clock3 className="w-3 h-3" />
-                Urgences 24h/24 — +237 671 440 486
-              </span>
-              <span className="hidden sm:block w-px h-3 bg-white/15" aria-hidden="true" />
-              <span className="flex items-center gap-1.5">
-                <ShieldCheck className="w-3 h-3 text-amber-400" />
-                Certifié ISO 9001:2015
-              </span>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 };
