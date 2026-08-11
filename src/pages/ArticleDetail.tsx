@@ -3,14 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
+import EditorialBreadcrumb from '@/components/EditorialBreadcrumb';
 import {
   Calendar, Clock, ArrowRight, ArrowLeft, Phone, Tag, Newspaper, User,
   MessageCircle
@@ -78,26 +71,15 @@ const ArticleDetail = () => {
             {/* Texte */}
             <Reveal>
             <div>
-              {/* Fil d'Ariane */}
-              <Breadcrumb className="mb-8">
-                <BreadcrumbList>
-                  <BreadcrumbItem>
-                    <BreadcrumbLink asChild>
-                      <Link to="/">Accueil</Link>
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator />
-                  <BreadcrumbItem>
-                    <BreadcrumbLink asChild>
-                      <Link to="/actualites">Actualités</Link>
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator />
-                  <BreadcrumbItem>
-                    <BreadcrumbPage>{article.titre}</BreadcrumbPage>
-                  </BreadcrumbItem>
-                </BreadcrumbList>
-              </Breadcrumb>
+              {/* Fil d'Ariane éditorial */}
+              <EditorialBreadcrumb
+                className="mb-8"
+                items={[
+                  { label: 'Accueil', to: '/' },
+                  { label: 'Actualités', to: '/actualites' },
+                  { label: article.titre },
+                ]}
+              />
 
               <div className="relative rounded-[2rem] overflow-hidden border border-border shadow-lg mb-10 aspect-[16/9]">
                 <img

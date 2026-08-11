@@ -3,14 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
+import EditorialBreadcrumb from '@/components/EditorialBreadcrumb';
 import {
   Calendar, Phone, Clock, CheckCircle, ArrowRight, MapPin, Mail
 } from 'lucide-react';
@@ -76,26 +69,15 @@ const ServiceDetail = () => {
       {/* ── Détail ── */}
       <section className="py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          {/* Fil d'Ariane */}
-          <Breadcrumb className="mb-10">
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link to="/">Accueil</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link to="/services">Services</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>{service.title}</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+          {/* Fil d'Ariane éditorial */}
+          <EditorialBreadcrumb
+            className="mb-10"
+            items={[
+              { label: 'Accueil', to: '/' },
+              { label: 'Services', to: '/services' },
+              { label: service.title },
+            ]}
+          />
 
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-start">
             {/* Texte */}
